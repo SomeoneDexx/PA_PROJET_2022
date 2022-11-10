@@ -27,9 +27,9 @@ int main(void){
     /* code ... */
 
     // Boucle de jeu
-    char** tab = lire_fichier("./ressources/grille_deux.txt");
+    char** tab = lire_fichier("./ressources/grille_trois.txt");
     int testW, testH;
-    taille_fichier("./ressources/grille_deux.txt", &testH, &testW);
+    taille_fichier("./ressources/grille_trois.txt", &testH, &testW);
     afficher_tab_blocs(tab, testH, testW);
   
     //Nettoyage final
