@@ -7,32 +7,32 @@
  */
 
 /* include */
-
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "fonctions_fichier.h"
+#include "blocs.h"
+#include "fenetre.h"
 
 /**
  * \brief Programme principal qui implémente la boucle du jeu
  */
-int main(int argc, char *args[]){
-  
-  //Données
-  
-  //Initialisation du jeu.
-  /* code ... */
-  
-  // Boucle de jeu
-  while(0 /* condition d'arrêt */){
-    
-    //Gestion des évènements
+int main(void){
+    //Données
+    bool terminer = false;
+    //Initialisation du jeu.
+    /* code ... */
 
-    //Mise à jour des données liées au monde
-    
-    //Rafraîchissement de l'écran
-    
-    //Pause de 10ms pour contrôler la vitesse de rafraîchissement
-    pause(10);
-  }
+    // Boucle de jeu
+    char** tab = lire_fichier("./ressources/grille_deux.txt");
+    int testW, testH;
+    taille_fichier("./ressources/grille_deux.txt", &testH, &testW);
+    afficher_tab_blocs(tab, testH, testW);
   
-  //Nettoyage final
+    //Nettoyage final
   
-  return 0;
+    return 0;
 }
