@@ -15,6 +15,7 @@
 #include <stdbool.h>
 #include "fonctions_fichier.h"
 #include "blocs.h"
+#include "grille.h"
 #include "fenetre.h"
 
 /**
@@ -22,15 +23,12 @@
  */
 int main(void){
     //Données
-    bool terminer = false;
+    
     //Initialisation du jeu.
     /* code ... */
 
     // Boucle de jeu
-    char** tab = lire_fichier("./ressources/grille_trois.txt");
-    int testW, testH;
-    taille_fichier("./ressources/grille_trois.txt", &testH, &testW);
-    afficher_tab_blocs(tab, testH, testW);
+    
   
     //Nettoyage final
   

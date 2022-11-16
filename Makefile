@@ -4,7 +4,7 @@ LIBS = -L./SDL2_ttf/.libs
 LDFLAGS = `sdl2-config --cflags --libs` -lSDL2_ttf
 INCLUDES = -I./SDL2_ttf
 EXEC = pentamino
-SRC = main.c blocs.c fenetre.c fonctions_fichier.c
+SRC = main.c blocs.c fenetre.c grille.c fonctions_fichier.c
 OBJ = $(SRC:.c=.o)
 
 all: $(EXEC)
