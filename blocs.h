@@ -36,16 +36,15 @@ struct Bloc {
 
 /**
  * \brief Fonction qui allouer un bloc en memoire
- * \param x L'abscisse du bloc
- * \param y L'ordonnee du bloc
+ * \param lignes Le nombre de lignes
+ * \param colonnes Le nombre de colonnes
  * \param coul La couleur du bloc
 */
-bloc_t allouer_bloc(int x, int y, enum couleur coul);
+bloc_t allouer_bloc(int lignes, int colonnes, enum couleur coul);
 
 /**
  * \brief Fonction qui desalloue un bloc enn memoire
  * \param bloc Le bloc a desallouer
- * \param l Le nombre de ligne du bloc, sa hauteur
 */
 void desallouer_bloc(bloc_t bloc);
 
