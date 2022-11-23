@@ -31,8 +31,7 @@ struct Bloc {
     int lignes; 
     int colonnes;
     int num;
-    char** tab; 
-    int index;
+    char** tab;
     enum couleur coul; 
 };
 
@@ -64,11 +63,10 @@ void afficher_bloc(bloc_t bloc);
 void taille_bloc(bloc_t bloc, int* nbLig, int* nbCol);
 
 /**
- * \brief Fonction qui recupere un bloc a l'indice en parametre dans un fichier precise
+ * \brief Fonction qui recupere le bloc dans un fichier precise
  * \param nom_fichier Le fichier dans lequel recuperer le bloc
- * \param ind L'indice du bloc a recuperer
 */
-bloc_t lire_bloc(const char* nom_fichier, int ind); 
+bloc_t lire_bloc(const char* nom_fichier); 
 
 /**
  * \brief Fonction qui change les valeurs attributs du bloc 
