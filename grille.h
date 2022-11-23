@@ -12,14 +12,15 @@ struct Grille {
     char** elements;
     int lignes;
     int colonnes;
+    char* nom_fichier;
 };
 
 /**
  * \brief Fonction qui alloue la grille en memoire
- * \param colonnes colonnes de la grille de jeu, en fonction du nombre de colonne du fichier lu
- * \param lignes lignes de la grille de jeu, en fonction du nombre de ligne du fichier lu
+ * \param lignes colonnes de la grille de jeu, en fonction du nombre de colonne du fichier lu
+ * \param colonnes lignes de la grille de jeu, en fonction du nombre de ligne du fichier lu
 */
-grille_t allouer_grille(int colonnes, int lignes);
+grille_t allouer_grille(int lignes, int colonnes);
 
 /**
  * \brief Fonction qui detruit la grille en memoire

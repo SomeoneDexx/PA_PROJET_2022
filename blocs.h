@@ -32,6 +32,7 @@ struct Bloc {
     int colonnes;
     int num;
     char** tab; 
+    int index;
     enum couleur coul; 
 };
 
