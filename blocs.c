@@ -3,39 +3,96 @@
 #include "blocs.h"
 
 /**
- * \brief Fonction qui allouer un bloc en memoire
+ * \brief Fonction qui alloue un bloc en memoire
  * \param lignes Le nombre de lignes
  * \param colonnes Le nombre de colonnes
- * \param coul La couleur du bloc
 */
-bloc_t allouer_bloc(int lignes, int colonnes, enum couleur coul){
-    bloc_t* bloc;
+bloc_t* allouer_bloc(int lignes, int colonnes){
+    bloc_t* bloc = NULL;
     bloc = malloc(sizeof(bloc_t));
-    return *bloc;
+
+    bloc->tab = malloc(sizeof(char*) * colonnes);
+    for(int i = 0; i < lignes; i++) {
+        bloc->tab[i] = malloc(sizeof(char) * colonnes);
+        for(int j = 0; j < colonnes; j++) {
+            bloc->tab[i][j] = '#'; 
+        }
+    }
+
+    return bloc;
 }
 
 /**
- * \brief Fonction qui desalloue un bloc enn memoire
+ * \brief Fonction qui desalloue un bloc en memoire
  * \param bloc Le bloc a desallouer
 */
-void desallouer_bloc(bloc_t bloc);
+void desallouer_bloc(bloc_t *bloc){
+    for(int i = 0; i < bloc->lignes; i++) {
+        free(bloc->tab[i]);
+    }
+    free(bloc->tab);
+    free(bloc);
+}
 
 /**
  * \brief Fonction qui affiche un bloc
  * \param bloc Le bloc a afficher
 */
-void afficher_bloc(bloc_t bloc);
+void afficher_bloc(bloc_t bloc){
+    printf("Le bloc n°%d est le suivant :\n\n", bloc.num);
+    for(int i = 0; i < bloc.lignes; i++) {
+        for(int j = 0; j < bloc.colonnes; j++) {
+            printf("%c", bloc.tab[i][j]);
+        }
+        printf("\n");
+    }
+}
 
 /**
- * \brief Fonction qui allouer un bloc en memoire
+ * \brief Fonction qui compte le nombre de lignes et de colonnes maximum d'un bloc
  * \param bloc Le bloc dont on veut les dimensions
  * \param nbLig Parametre qui servira a changer la valeur de la variable rentree
  * \param nbCol Parametre qui servira a changer la valeur de la variable rentree
 */
-void taille_bloc(bloc_t bloc, int* nbLig, int* nbCol);
+void taille_bloc(bloc_t bloc, int* nbLig, int* nbCol){
+    int lig = 0;
+    int col = 0;
+    int tmp = 0;
+    int ind = bloc.num;
+    char* n = (char*)bloc.num;
+    //char* nomFichier = "ressources/blocs/" + n + ".txt";
+
+    FILE* fich = NULL;
+    //fich = fopen(nomFichier, "r");
+
+    if (fich != NULL)
+    {
+        while (feof(fich) != 1)  
+        {  
+            col++;
+            char car = fgetc(fich);
+            if (car == '\r' ){
+                col--;
+            } else {
+                if (car == '\n'){
+                    col--;
+                    lig++;
+                    if(col > tmp){
+                       tmp = col;
+                    }
+                    col = 0;
+                }
+            }
+        } 
+        fclose(fich);   
+    }
+
+    *nbLig = lig;
+    *nbCol = tmp;
+}
 
 /**
- * \brief Fonction qui recupere un bloc a l'indice en parametre dansun fichier precise
+ * \brief Fonction qui recupere un bloc a l'indice en parametre dans un fichier precise
  * \param nom_fichier Le fichier dans lequel recuperer le bloc
  * \param ind L'indice du bloc a recuperer
 */

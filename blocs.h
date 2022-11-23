@@ -2,7 +2,7 @@
 #define BLOCS_H
 
 /**
- * \brief Les couleurs possibles des blocs
+ * \brief Les 16 couleurs possibles des blocs
 */
 enum couleur { 
     ROUGE,
@@ -30,6 +30,7 @@ typedef struct Bloc bloc_t;
 struct Bloc {
     int lignes; 
     int colonnes;
+    int num;
     char** tab; 
     enum couleur coul; 
 };
@@ -38,15 +39,14 @@ struct Bloc {
  * \brief Fonction qui allouer un bloc en memoire
  * \param lignes Le nombre de lignes
  * \param colonnes Le nombre de colonnes
- * \param coul La couleur du bloc
 */
-bloc_t allouer_bloc(int lignes, int colonnes, enum couleur coul);
+bloc_t* allouer_bloc(int lignes, int colonnes);
 
 /**
  * \brief Fonction qui desalloue un bloc enn memoire
  * \param bloc Le bloc a desallouer
 */
-void desallouer_bloc(bloc_t bloc);
+void desallouer_bloc(bloc_t *bloc);
 
 /**
  * \brief Fonction qui affiche un bloc
@@ -55,7 +55,7 @@ void desallouer_bloc(bloc_t bloc);
 void afficher_bloc(bloc_t bloc);
 
 /**
- * \brief Fonction qui allouer un bloc en memoire
+ * \brief Fonction qui compte le nombre de lignes et de colonnes maximum d'un bloc
  * \param bloc Le bloc dont on veut les dimensions
  * \param nbLig Parametre qui servira a changer la valeur de la variable rentree
  * \param nbCol Parametre qui servira a changer la valeur de la variable rentree
@@ -63,7 +63,7 @@ void afficher_bloc(bloc_t bloc);
 void taille_bloc(bloc_t bloc, int* nbLig, int* nbCol);
 
 /**
- * \brief Fonction qui recupere un bloc a l'indice en parametre dansun fichier precise
+ * \brief Fonction qui recupere un bloc a l'indice en parametre dans un fichier precise
  * \param nom_fichier Le fichier dans lequel recuperer le bloc
  * \param ind L'indice du bloc a recuperer
 */
