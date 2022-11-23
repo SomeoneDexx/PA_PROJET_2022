@@ -19,10 +19,9 @@
 #include "fenetre.h"
 
 /**
- * \brief Programme principal qui implémente la boucle du jeu
+ * \brief Programme principal qui créé les éléments/variables et implémente la boucle du jeu et 
  */
 int main(void){
-    //Données
     SDL_Window* window; // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
     bool terminer = false;

@@ -25,7 +25,7 @@ struct Fenetre {
  * \param hauteur La largeur de la fenetre
  * \param largeur La hauteur de la fenetre
 */
-fenetre_t allouer_fenetre(char* nom_fichier, int hauteur, int largeur);
+fenetre_t init_fenetre(char* nom_fichier, int hauteur, int largeur);
 
 /**
  * \brief Fonction qui retire la fenetre en memoire
