@@ -1,6 +1,10 @@
 #ifndef FENETRE_H
 #define FENETRE_H
 
+#define WINDOW_HEIGHT 500
+#define WINDOW_WIDTH 500
+
+#include <SDL2/SDL.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include "blocs.h"
@@ -12,17 +16,16 @@
 typedef struct Fenetre fenetre_t;
 struct Fenetre {
     grille_t grille;
-    bloc_t* blocs;
     int hauteur;
     int largeur;
 };
 
 /**
  * \brief Fonction qui crée une fenetre en memoire
- * \param largeur La largeur de la fenetre
- * \param hauteur La hauteur de la fenetre
+ * \param hauteur La largeur de la fenetre
+ * \param largeur La hauteur de la fenetre
 */
-fenetre_t allouer_fenetre(int largeur, int hauteur);
+fenetre_t allouer_fenetre(char* nom_fichier, int hauteur, int largeur);
 
 /**
  * \brief Fonction qui retire la fenetre en memoire

@@ -8,7 +8,7 @@
  * \param colonnes Le nombre de colonnes
  * \param coul La couleur du bloc
 */
-bloc_t allouer_bloc(int lignes, int colonnes, enum couleur coul){
+bloc_t allouer_bloc(int lignes, int colonnes){
     bloc_t* bloc;
     bloc = malloc(sizeof(bloc_t));
     return *bloc;

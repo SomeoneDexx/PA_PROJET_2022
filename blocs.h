@@ -31,6 +31,7 @@ struct Bloc {
     int lignes; 
     int colonnes;
     char** tab; 
+    int index;
     enum couleur coul; 
 };
 
@@ -40,7 +41,7 @@ struct Bloc {
  * \param colonnes Le nombre de colonnes
  * \param coul La couleur du bloc
 */
-bloc_t allouer_bloc(int lignes, int colonnes, enum couleur coul);
+bloc_t allouer_bloc(int lignes, int colonnes);
 
 /**
  * \brief Fonction qui desalloue un bloc enn memoire
