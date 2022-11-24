@@ -1,12 +1,8 @@
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
 #include "grille.h"
-#include "blocs.h"
-#include "fonctions_fichier.h"
+#include "bloc.h"
 
 grille_t init_grille(char* nom_fichier, int lignes, int colonnes) {
     grille_t grille;
@@ -22,5 +18,5 @@ grille_t init_grille(char* nom_fichier, int lignes, int colonnes) {
     return grille;
 }
 
-void ecrire_grille(bloc_t bloc, char** tab) {
+void ecrire_fichier_grille(bloc_t bloc, char** tab) {
 }

@@ -1,5 +1,7 @@
-#ifndef BLOCS_H
-#define BLOCS_H
+#ifndef BLOC_H
+#define BLOC_H
+
+#include "fonctions_fichier.h"
 
 /**
  * \brief Les 16 couleurs possibles des blocs
@@ -57,10 +59,10 @@ bloc_t init_bloc(bloc_t bloc, int num, enum couleur coul);
 void desallouer_bloc(bloc_t *bloc);
 
 /**
- * \brief Fonction qui affiche un bloc
+ * \brief Fonction qui affiche un bloc dans la console
  * \param bloc Le bloc a afficher
 */
-void afficher_bloc(bloc_t bloc);
+void print_bloc(bloc_t bloc);
 
 /**
  * \brief Fonction qui compte le nombre de lignes et de colonnes maximum d'un bloc

@@ -1,14 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "blocs.h"
-#include "fonctions_fichier.h"
+#include "bloc.h"
 
-/**
- * \brief Fonction qui alloue un bloc en memoire
- * \param lignes Le nombre de lignes
- * \param colonnes Le nombre de colonnes
-*/
 bloc_t* allouer_bloc(int lignes, int colonnes){
     bloc_t* bloc = NULL;
     bloc = malloc(sizeof(bloc_t));
@@ -24,12 +18,6 @@ bloc_t* allouer_bloc(int lignes, int colonnes){
     return bloc;
 }
 
-/**
- * \brief Fonction qui initialise un bloc grace aux donnees passees en parametres
- * \param bloc Le bloc a initialiser
- * \param num Le numero du bloc
- * \param coul La couleur du bloc
-*/
 bloc_t init_bloc(bloc_t bloc, int num, enum couleur coul){
     bloc.num = num;
     bloc.coul = coul;
@@ -49,10 +37,6 @@ bloc_t init_bloc(bloc_t bloc, int num, enum couleur coul){
     return bloc;
 }
 
-/**
- * \brief Fonction qui desalloue un bloc en memoire
- * \param bloc Le bloc a desallouer
-*/
 void desallouer_bloc(bloc_t *bloc){
     for(int i = 0; i < bloc->lignes; i++) {
         free(bloc->tab[i]);
@@ -61,11 +45,7 @@ void desallouer_bloc(bloc_t *bloc){
     free(bloc);
 }
 
-/**
- * \brief Fonction qui affiche un bloc
- * \param bloc Le bloc a afficher
-*/
-void afficher_bloc(bloc_t bloc){
+void print_bloc(bloc_t bloc){
     printf("Le bloc n°%d est le suivant :\n\n", bloc.num);
     for(int i = 0; i < bloc.lignes; i++) {
         for(int j = 0; j < bloc.colonnes; j++) {
@@ -75,12 +55,6 @@ void afficher_bloc(bloc_t bloc){
     }
 }
 
-/**
- * \brief Fonction qui compte le nombre de lignes et de colonnes maximum d'un bloc
- * \param nom_fichier_bloc Le fichier du bloc dont on veut les dimensions
- * \param nbLig Parametre qui servira a changer la valeur de la variable rentree
- * \param nbCol Parametre qui servira a changer la valeur de la variable rentree
-*/
 void taille_bloc(char* nom_fichier_bloc, int* nbLig, int* nbCol){
     int lig = 0;
     int col = 0;
@@ -115,10 +89,6 @@ void taille_bloc(char* nom_fichier_bloc, int* nbLig, int* nbCol){
     *nbCol = tmp;
 }
 
-/**
- * \brief Fonction qui recupere le bloc dans un fichier precise
- * \param nom_fichier Le fichier dans lequel recuperer le bloc
-*/
 bloc_t lire_bloc(const char* nom_fichier){
     int lig = 0, col = 0;
 
@@ -156,23 +126,8 @@ bloc_t lire_bloc(const char* nom_fichier){
     return *bloc;
 }
 
-/**
- * \brief Fonction qui change les valeurs attributs du bloc 
- * \param bloc Le bloc a modifier
- * \param lignes Le nombre de lignes voulu
- * \param colonnes Le nombre de colonnes voulu
- * \param coul La couleur voulue
-*/
 void modif_bloc(bloc_t bloc, int lignes, int colonnes, enum couleur coul);
 
-/**
- * \brief Fonction qui fait tourner un bloc dans le sens horaire
- * \param bloc Le bloc a faire tourner
-*/
 void rotation_sh(bloc_t bloc);
 
-/**
- * \brief Fonction qui fait tourner un bloc dans le sens anti-horaire
- * \param bloc Le bloc a faire tourner
-*/
 void rotation_sah(bloc_t bloc);

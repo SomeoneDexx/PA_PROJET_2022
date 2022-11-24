@@ -1,10 +1,7 @@
 #ifndef GRILLE_H
 #define GRILLE_H
 
-#include <stdbool.h>
-#include <stdio.h>
-#include "blocs.h"
-
+#include "bloc.h"
 
 /**
  * \brief La grille de jeu
@@ -29,7 +26,7 @@ grille_t init_grille(char* nom_fichier, int lignes, int colonnes);
  * \param bloc Le bloc à placer dans la grille
  * \param tab  Le tableau à changer  
 */
-void ecrire_grille(bloc_t bloc, char** tab);
+void ecrire_fichier_grille(bloc_t bloc, char** tab);
 
 /**
  * \brief Fonction qui reset la grille actuelle en enlevant tous les blocs placés et en réécrivant le fichier

@@ -9,8 +9,8 @@
 /* include */
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include "fonctions_fichier.h"
-#include "fenetre.h"
+#include <stdbool.h>
+#include "donnees/fonctions_fichier.h"
 
 /**
  * \brief Programme principal qui créé les éléments/variables et implémente la boucle du jeu et 
@@ -18,6 +18,7 @@
 int main(void){
     SDL_Window* window; // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
+    SDL_Renderer *renderer;
     bool terminer = false;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -42,13 +43,14 @@ int main(void){
 
 
     //Initialisation du jeu.
-    /* code ... */
+    /* init(...) */
 
     // Boucle de jeu
     while(!terminer) {
         SDL_RenderClear(ecran);
 
-        //Gestion des mouvements du personnage
+        // Evenements
+
         while(SDL_PollEvent(&evenements)) {
             switch(evenements.type) {
                 case SDL_QUIT:
@@ -66,17 +68,20 @@ int main(void){
         
         }
 
+        // Mise à jour des donnees
+
+        // Rafraichissement graphique
+
         SDL_RenderPresent(ecran);
     }
-
+  
+    //Nettoyage final
     // Libérer de la mémoire
     SDL_DestroyRenderer(ecran);
 
     // Quitter SDL
     SDL_DestroyWindow(window);
     SDL_Quit();
-  
-    //Nettoyage final
   
     return 0;
 }
