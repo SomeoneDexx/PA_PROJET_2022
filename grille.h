@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include "blocs.h"
+
 
 /**
  * \brief La grille de jeu

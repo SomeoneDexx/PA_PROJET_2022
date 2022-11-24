@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "blocs.h"
+#include "fonctions_fichier.h"
 
 /**
  * \brief Fonction qui alloue un bloc en memoire
@@ -19,6 +20,31 @@ bloc_t* allouer_bloc(int lignes, int colonnes){
             bloc->tab[i][j] = '#'; 
         }
     }
+
+    return bloc;
+}
+
+/**
+ * \brief Fonction qui initialise un bloc grace aux donnees passees en parametres
+ * \param bloc Le bloc a initialiser
+ * \param num Le numero du bloc
+ * \param coul La couleur du bloc
+*/
+bloc_t init_bloc(bloc_t bloc, int num, enum couleur coul){
+    bloc.num = num;
+    bloc.coul = coul;
+
+    int l = 0;
+    int c = 0;
+
+    char n[2];
+    sprintf(n, "%d", bloc.num);
+    char* chemin = "ressources/blocs/bloc";
+    char* extension = ".txt";
+    strncat(chemin, n, 2);
+    strncat(chemin, extension, 6);
+
+    taille_bloc(chemin, &l, &c);
 
     return bloc;
 }
@@ -51,28 +77,17 @@ void afficher_bloc(bloc_t bloc){
 
 /**
  * \brief Fonction qui compte le nombre de lignes et de colonnes maximum d'un bloc
- * \param bloc Le bloc dont on veut les dimensions
+ * \param nom_fichier_bloc Le fichier du bloc dont on veut les dimensions
  * \param nbLig Parametre qui servira a changer la valeur de la variable rentree
  * \param nbCol Parametre qui servira a changer la valeur de la variable rentree
 */
-void taille_bloc(bloc_t bloc, int* nbLig, int* nbCol){
+void taille_bloc(char* nom_fichier_bloc, int* nbLig, int* nbCol){
     int lig = 0;
     int col = 0;
     int tmp = 0;
-    int ind = bloc.num;
-    char n[2];
-    sprintf(n, "%d", ind);
-    char* chemin = "ressources/blocs/bloc";
-    char* extension = ".txt";
-    strncat(chemin, n, 2);
-    strncat(chemin, extension, 6);
-    for (int i = 0; i < 5; i++){
-        printf("iuo\n");
-    }
-    printf("%s\n", chemin);
 
     FILE* fich = NULL;
-    fich = fopen(chemin, "r");
+    fich = fopen(nom_fichier_bloc, "r");
 
     if (fich != NULL)
     {

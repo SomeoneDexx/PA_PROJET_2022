@@ -15,7 +15,7 @@ grille_t init_grille(char* nom_fichier, int lignes, int colonnes) {
 
     //On met les tailles en fonction de la grille choisie
     int lines, columns;
-    taille(nom_fichier, &lines, &columns);
+    taille_fichier(nom_fichier, &lines, &columns);
 
     grille.lignes = lines;
     grille.colonnes = columns;
