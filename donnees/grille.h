@@ -12,6 +12,7 @@ struct Grille {
     int lignes;
     int colonnes;
     char* nom_fichier;
+    int num;
 };
 
 /**
@@ -19,14 +20,14 @@ struct Grille {
  * \param lignes colonnes de la grille de jeu, en fonction du nombre de colonne du fichier lu
  * \param colonnes lignes de la grille de jeu, en fonction du nombre de ligne du fichier lu
 */
-grille_t init_grille(char* nom_fichier, int lignes, int colonnes);
+grille_t init_grille(char* nom_fichier, int num, int lignes, int colonnes);
 
 /**
  * \brief Fonction qui permet d'écrire dans le fichier de la grille les blocs placés dans la grille
  * \param bloc Le bloc à placer dans la grille
  * \param tab  Le tableau à changer  
 */
-void ecrire_fichier_grille(bloc_t bloc, char** tab);
+void ecrire_fichier_grille(grille_t grille, char** tab);
 
 /**
  * \brief Fonction qui reset la grille actuelle en enlevant tous les blocs placés et en réécrivant le fichier
@@ -35,6 +36,6 @@ void ecrire_fichier_grille(bloc_t bloc, char** tab);
  * \param lignes La hauteur du tableau
  * \param colonnes La largeur du tableau
 */ 
-void reset_grille(char* nom_fichier, char** tab, int lignes, int colonnes);
+void reset_grille(grille_t grille, char** tab);
 
 #endif
