@@ -16,6 +16,6 @@ doc:
 	doxygen pentamino.doc
 	make -C latex
 clean:
-	rm -rf *.o *~
+	rm -rf *.o *~ $(OBJ)
 mrproper: clean
 	rm -rf $(EXEC)
