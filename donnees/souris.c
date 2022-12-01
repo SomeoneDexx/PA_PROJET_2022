@@ -10,7 +10,3 @@ void cursor_position(souris_t souris) {
     souris.pos_y = y;
     printf("x : %d, y : %d\n", souris.pos_x, souris.pos_y);
 }
-
-void print_cursor_position(souris_t souris) {
-    cursor_position(souris);
-}

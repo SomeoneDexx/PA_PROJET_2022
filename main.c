@@ -69,7 +69,7 @@ int main(void){
                     }
                     break;
                 case SDL_MOUSEMOTION:
-                    print_cursor_position(souris);
+                    cursor_position(souris);
                     break;
             }
         }
