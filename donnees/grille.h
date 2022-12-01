@@ -11,7 +11,6 @@ struct Grille {
     char** elements;
     int lignes;
     int colonnes;
-    char* nom_fichier;
     int num;
 };
 
@@ -37,5 +36,12 @@ void ecrire_fichier_grille(grille_t grille, char** tab);
  * \param colonnes La largeur du tableau
 */ 
 void reset_grille(grille_t grille, char** tab);
+
+/**
+ * \brief Fonction qui modifie la grille
+ * \param grille La grille a modifier
+ * \param tab Le tableau du bloc à placer dans la grille
+*/
+void modif_grille(grille_t grille, char** tab);
 
 #endif

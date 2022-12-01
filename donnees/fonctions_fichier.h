@@ -21,7 +21,7 @@ void desallouer_tab_blocs(char** tab_bloc, int lignes);
  * \param lignes La hauteur du tableau a afficher
  * \param colonnes La largeur du tableau a afficher
 */
-void afficher_tab_blocs(char** tab_bloc, int lignes, int colonnes);
+void afficher_tab_cases(char** tab_bloc, int lignes, int colonnes);
 
 /**
  * \brief Fonction qui recupere la taille d'un fichier

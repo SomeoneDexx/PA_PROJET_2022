@@ -11,6 +11,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
 #include "donnees/fonctions_fichier.h"
+#include "evenements/evenements.h"
+#include "donnees/souris.h"
 
 /**
  * \brief Programme principal qui créé les éléments/variables et implémente la boucle du jeu et 
@@ -19,6 +21,9 @@ int main(void){
     SDL_Window* window; // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
     SDL_Renderer *renderer;
+    souris_t souris;
+    souris.pos_x = 0;
+    souris.pos_y = 0;
     bool terminer = false;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -49,7 +54,6 @@ int main(void){
     while(!terminer) {
         SDL_RenderClear(ecran);
 
-        // Evenements
 
         while(SDL_PollEvent(&evenements)) {
             switch(evenements.type) {
@@ -62,10 +66,12 @@ int main(void){
                         case SDLK_q:
                             terminer = true; 
                             break;
-                    
                     }
+                    break;
+                case SDL_MOUSEMOTION:
+                    print_cursor_position(souris);
+                    break;
             }
-        
         }
 
         // Mise à jour des donnees

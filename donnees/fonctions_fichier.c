@@ -27,7 +27,7 @@ void desallouer_tab_blocs(char** tab, int lignes) {
 }
 
 //Affichage de chaque caractère dans le tableau
-void afficher_tab_blocs(char** tab, int lignes, int colonnes) {
+void afficher_tab_cases(char** tab, int lignes, int colonnes) {
     for(int i = 0; i < lignes; i++) {
         for(int j = 0; j < colonnes; j++) {
             printf("%c", tab[i][j]);

@@ -22,7 +22,7 @@ grille_t init_grille(char* nom_fichier, int num, int lignes, int colonnes) {
 }
 
 void ecrire_fichier_grille(grille_t grille, char** tab) {
-    char n;
+    char n[2];
     sprintf(n, "%d", grille.num);
     char* chemin = "ressources/grilles/grille";
     char* extension = ".txt";
@@ -38,13 +38,6 @@ void reset_grille(grille_t grille, char** tab) {
             tab[i][j] = '#';
         }
     }
-
-    char n;
-    sprintf(n, "%d", grille.num);
-    char* chemin = "ressources/grilles/grille";
-    char* extension = ".txt";
-    strncat(chemin, n, 1);
-    char* file_name = strncat(chemin, extension, 5);
-
-    ecrire_fichier(file_name, grille.elements, grille.lignes, grille.colonnes);
 }
+
+
