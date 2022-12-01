@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 //n c'est les lignes, m les colonnes
-char** allouer_tab_blocs(int lignes, int colonnes) { 
+char** allouer_tab_cases(int lignes, int colonnes) { 
     char** tab = NULL;
     tab = malloc(sizeof(char*) * lignes);
     
@@ -18,7 +18,7 @@ char** allouer_tab_blocs(int lignes, int colonnes) {
 }
 
 //On desalloue chaque ligne puis on desalloue tab, on desalloue chaque malloc en fait
-void desallouer_tab_blocs(char** tab, int lignes) {
+void desallouer_tab_cases(char** tab, int lignes) {
     for(int i = 0; i < lignes; i++) {
         free(tab[i]);
     }
@@ -78,7 +78,7 @@ char** lire_fichier(const char* nomFichier) {
 
     int lignes, colonnes;
     taille_fichier(nomFichier, &lignes, &colonnes);
-    char** tab = allouer_tab_blocs(lignes, colonnes);
+    char** tab = allouer_tab_cases(lignes, colonnes);
     
     char c;
     int lineCount = 0, columnCount = 0;

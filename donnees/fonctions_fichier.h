@@ -6,14 +6,14 @@
  * \param lignes La hauteur du tableau
  * \param colonnes La largeur du tableau
 */
-char** allouer_tab_blocs(int lignes, int colonnes);
+char** allouer_tab_cases(int lignes, int colonnes);
 
 /**
  * \brief Fonction qui desalloue un tableau en memoire
  * \param tab_bloc Le tableau a desallouer
  * \param lignes La hauteur du tableau a desallouer
 */
-void desallouer_tab_blocs(char** tab_bloc, int lignes);
+void desallouer_tab_cases(char** tab_bloc, int lignes);
 
 /**
  * \brief Fonction qui fait tourner un bloc dans le sens horaire
@@ -38,7 +38,7 @@ void taille_fichier(const char* nom_fichier, int* nombre_lignes, int* nombre_col
 char** lire_fichier(const char* nom_fichier);
 
 /**
- * \brief Fonction qui recupere la taille d'un fichier
+ * \brief Fonction qui écrit la tableau tab de taille n*m dans dans un fichier nommé nom_fichier
  * \param nom_fichier Le fichier dans lequel on travaille
  * \param tab Le tableau contenant les nouvelles valeurs
  * \param lignes Le nombre de lignes du nouveau tableau

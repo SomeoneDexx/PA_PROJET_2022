@@ -46,11 +46,10 @@ bloc_t* allouer_bloc(int lignes, int colonnes);
 
 /**
  * \brief Fonction qui initialise un bloc grace aux donnees passees en parametres
- * \param bloc Le bloc a initialiser
  * \param num Le numero du bloc
  * \param coul La couleur du bloc
 */
-bloc_t init_bloc(bloc_t bloc, int num, enum couleur coul);
+bloc_t init_bloc(int num, enum couleur coul);
 
 /**
  * \brief Fonction qui desalloue un bloc en memoire
@@ -66,17 +65,17 @@ void print_bloc(bloc_t bloc);
 
 /**
  * \brief Fonction qui compte le nombre de lignes et de colonnes maximum d'un bloc
- * \param nom_fichier_bloc Le fichier du bloc dont on veut les dimensions
+ * \param nom_fichier Le fichier du bloc dont on veut les dimensions
  * \param nbLig Parametre qui servira a changer la valeur de la variable rentree
  * \param nbCol Parametre qui servira a changer la valeur de la variable rentree
 */
-void taille_bloc(char* nom_fichier_bloc, int* nbLig, int* nbCol);
+void taille_bloc(char* nom_fichier, int* nbLig, int* nbCol);
 
 /**
- * \brief Fonction qui recupere le bloc dans un fichier precise
+ * \brief Fonction qui recupere le contenu d'un fichier bloc precise
  * \param nom_fichier Le fichier dans lequel recuperer le bloc
 */
-bloc_t lire_bloc(const char* nom_fichier); 
+char** lire_bloc(char* nom_fichier); 
 
 /**
  * \brief Fonction qui change les valeurs attributs du bloc 

@@ -9,9 +9,9 @@ grille_t init_grille(char* nom_fichier, int num, int lignes, int colonnes) {
     grille_t grille;
 
     grille.num = num;
-    grille.elements = allouer_tab_blocs(lignes, colonnes);
+    grille.elements = allouer_tab_cases(lignes, colonnes);
 
-    //On met les tailles en fonction de la grille choisie
+    // On met les tailles en fonction de la grille choisie
     int lines, columns;
     taille_fichier(nom_fichier, &lines, &columns);
 
@@ -21,23 +21,39 @@ grille_t init_grille(char* nom_fichier, int num, int lignes, int colonnes) {
     return grille;
 }
 
-void ecrire_fichier_grille(grille_t grille, char** tab) {
+void ecrire_fichier_grille(grille_t grille) {
+    
+    // On récupère le nom du fichier texte de la grille dont on veut réécrire le fichier.
     char n[2];
-    sprintf(n, "%d", grille.num);
-    char* chemin = "ressources/grilles/grille";
+    int num = grille.num;
+    sprintf(n, "%d", num);
+    char chemin[50] = "../ressources/grilles/grille";
     char* extension = ".txt";
-    strncat(chemin, n, 1);
-    char* file_name = strncat(chemin, extension, 5);
+    strcat(chemin, n);
+    strcat(chemin, extension);
 
-    ecrire_fichier(file_name, grille.elements, grille.lignes, grille.colonnes);
+    ecrire_fichier(chemin, grille.elements, grille.lignes, grille.colonnes);
 }
 
-void reset_grille(grille_t grille, char** tab) {
+void reset_grille(grille_t grille) {
+
+    // On "réinitilise" le tableau de la grille
     for(int i = 0; i < grille.lignes; i++) {
         for(int j = 0; j < grille.colonnes; j++) {
-            tab[i][j] = '#';
+            grille.elements[i][j] = '#';
         }
     }
+
+    // On récupère le nom du fichier texte de la grille dont on veut réécrire le fichier.
+    char n[2];
+    int num = grille.num;
+    sprintf(n, "%d", num);
+    char chemin[50] = "../ressources/grilles/grille";
+    char* extension = ".txt";
+    strcat(chemin, n);
+    strcat(chemin, extension);
+
+    ecrire_fichier(chemin, grille.elements, grille.lignes, grille.colonnes);
 }
 
 
