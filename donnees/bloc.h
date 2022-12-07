@@ -49,7 +49,7 @@ bloc_t* allouer_bloc(int lignes, int colonnes);
  * \param num Le numero du bloc
  * \param coul La couleur du bloc
 */
-bloc_t init_bloc(int num, enum couleur coul);
+bloc_t* init_bloc(int num, enum couleur coul);
 
 /**
  * \brief Fonction qui desalloue un bloc en memoire
@@ -69,22 +69,13 @@ void print_bloc(bloc_t bloc);
  * \param nbLig Parametre qui servira a changer la valeur de la variable rentree
  * \param nbCol Parametre qui servira a changer la valeur de la variable rentree
 */
-void taille_bloc(char* nom_fichier, int* nbLig, int* nbCol);
+void taille_bloc(const char* nom_fichier, int* nbLig, int* nbCol);
 
 /**
  * \brief Fonction qui recupere le contenu d'un fichier bloc precise
  * \param nom_fichier Le fichier dans lequel recuperer le bloc
 */
 char** lire_bloc(char* nom_fichier); 
-
-/**
- * \brief Fonction qui change les valeurs attributs du bloc 
- * \param bloc Le bloc a modifier
- * \param lignes Le nombre de lignes voulu
- * \param colonnes Le nombre de colonnes voulu
- * \param coul La couleur voulue
-*/
-void modif_bloc(bloc_t bloc, int lignes, int colonnes, enum couleur coul);
 
 /**
  * \brief Fonction qui fait tourner un bloc dans le sens horaire

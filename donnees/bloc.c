@@ -18,23 +18,27 @@ bloc_t* allouer_bloc(int lignes, int colonnes){
     return bloc;
 }
 
-bloc_t init_bloc(int num, enum couleur coul){
+bloc_t* init_bloc(int num, enum couleur coul){
 
     char n[2];
     sprintf(n, "%d", num);
-    char chemin[50] = "../ressources/blocs/bloc";
+    char chemin[50] = "ressources/blocs/bloc";
     char* extension = ".txt";
     strcat(chemin, n);
     strcat(chemin, extension);
 
     int l, c;
     taille_bloc(chemin, &l, &c);
-    bloc_t *bloc = allouer_bloc(l, c);
-    
+    bloc_t* bloc = allouer_bloc(l, c);
+
+    bloc->tab = lire_bloc(chemin);
+
+    bloc->lignes = l;
+    bloc->colonnes = c;
     bloc->num = num;
     bloc->coul = coul;
 
-    return *bloc;
+    return bloc;
 }
 
 void desallouer_bloc(bloc_t *bloc){
@@ -46,7 +50,8 @@ void desallouer_bloc(bloc_t *bloc){
 }
 
 void print_bloc(bloc_t bloc){
-    printf("Le bloc n°%d est le suivant :\n\n", bloc.num);
+    printf("Le bloc n°%d est le suivant :\n", bloc.num);
+    printf("Dimension du bloc n°%d : %dx%d\n\n", bloc.num, bloc.lignes, bloc.colonnes);
     for(int i = 0; i < bloc.lignes; i++) {
         for(int j = 0; j < bloc.colonnes; j++) {
             printf("%c", bloc.tab[i][j]);
@@ -55,7 +60,7 @@ void print_bloc(bloc_t bloc){
     }
 }
 
-void taille_bloc(char* nom_fichier, int* nbLig, int* nbCol){
+void taille_bloc(const char* nom_fichier, int* nbLig, int* nbCol){
     int lig = 0;
     int col = 0;
     int tmp = 0;
@@ -121,12 +126,6 @@ char** lire_bloc(char* nom_fichier){
     fclose(fileOpen);
         
     return tab;
-}
-
-void modif_bloc(bloc_t bloc, int lignes, int colonnes, enum couleur coul){
-    bloc.lignes = lignes;
-    bloc.colonnes = colonnes;
-    bloc.coul = coul;
 }
 
 void rotation_sh(bloc_t bloc){
