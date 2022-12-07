@@ -13,6 +13,7 @@
 #include "donnees/fonctions_fichier.h"
 #include "evenements/evenements.h"
 #include "donnees/souris.h"
+#include "graphique/graphique.h"
 
 /**
  * \brief Programme principal qui créé les éléments/variables et implémente la boucle du jeu et 
@@ -20,7 +21,6 @@
 int main(void){
     SDL_Window* window; // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
-    SDL_Renderer *renderer;
     souris_t souris;
     souris.pos_x = 0;
     souris.pos_y = 0;
@@ -32,8 +32,8 @@ int main(void){
         return EXIT_FAILURE;
     }
 
-    int width = 500;
-    int height = 500;
+    int width = WINDOW_WIDTH;
+    int height = WINDOW_HEIGHT;
     window = SDL_CreateWindow("Fenetre SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_RESIZABLE);
 
     if(window == NULL) {
@@ -42,19 +42,19 @@ int main(void){
         return EXIT_FAILURE;
     }
 
+    SDL_SetWindowTitle(window, "Pentamino");
+
     //Mettre en place un contexte de rendu de l’écran
     SDL_Renderer* ecran;
     ecran = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);    
 
 
     //Initialisation du jeu.
-    /* init(...) */
+    SDL_Color grille_background_color = {34, 34, 34, 34};
+    SDL_Color grille_ligne_color = {255, 255, 255, 255};
 
     // Boucle de jeu
     while(!terminer) {
-        SDL_RenderClear(ecran);
-
-
         while(SDL_PollEvent(&evenements)) {
             switch(evenements.type) {
                 case SDL_QUIT:
@@ -77,6 +77,22 @@ int main(void){
         // Mise à jour des donnees
 
         // Rafraichissement graphique
+
+        SDL_SetRenderDrawColor(ecran, grille_background_color.r, grille_background_color.a, grille_background_color.b, grille_background_color.a);
+
+        SDL_RenderClear(ecran);
+
+        SDL_SetRenderDrawColor(ecran, grille_ligne_color.r, grille_ligne_color.g, grille_ligne_color.b, grille_ligne_color.a);
+
+        for(int i = 50; i <= 650; i += CELL_SIZE) {
+            SDL_RenderDrawLine(ecran, i, 50, i, 230);
+        }
+
+        for(int j = 50; j <= 230; j += CELL_SIZE) {
+            SDL_RenderDrawLine(ecran,  50, j, 650, j);
+        }
+
+        SDL_SetRenderDrawColor(ecran, grille_background_color.r, grille_background_color.a, grille_background_color.b, grille_background_color.a);
 
         SDL_RenderPresent(ecran);
     }
