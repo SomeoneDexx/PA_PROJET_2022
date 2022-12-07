@@ -21,9 +21,11 @@
 int main(void){
     SDL_Window* window; // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
-    souris_t souris;
-    souris.pos_x = 0;
-    souris.pos_y = 0;
+    souris_t souris; //Instanciation d'une souris
+
+    //Initialise les champs de la souris
+    init_souris(souris);
+
     bool terminer = false;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -52,6 +54,14 @@ int main(void){
     //Initialisation du jeu.
     SDL_Color grille_background_color = {34, 34, 34, 34};
     SDL_Color grille_ligne_color = {255, 255, 255, 255};
+    SDL_Color grille_curseur_color = {255, 255, 255, 255};
+
+    SDL_Rect grille_curseur = {
+        .x = (20 - 1) / 2 * 30,
+        .y = (6 - 1) / 2 * 30,
+        .w = 30,
+        .h = 30,
+    };
 
     // Boucle de jeu
     while(!terminer) {
@@ -71,6 +81,10 @@ int main(void){
                 case SDL_MOUSEMOTION:
                     cursor_position(souris);
                     break;
+                case SDL_MOUSEBUTTONDOWN:
+                    grille_curseur.x = (evenements.motion.x / 30) * 30;
+                    grille_curseur.y = (evenements.motion.y / 30) * 30;
+                    break;
             }
         }
 
@@ -84,15 +98,18 @@ int main(void){
 
         SDL_SetRenderDrawColor(ecran, grille_ligne_color.r, grille_ligne_color.g, grille_ligne_color.b, grille_ligne_color.a);
 
-        for(int i = 50; i <= 650; i += CELL_SIZE) {
-            SDL_RenderDrawLine(ecran, i, 50, i, 230);
+        for(int i = 0; i <= 600; i += CELL_SIZE) {
+            SDL_RenderDrawLine(ecran, i, 0, i, 180);
         }
 
-        for(int j = 50; j <= 230; j += CELL_SIZE) {
-            SDL_RenderDrawLine(ecran,  50, j, 650, j);
+        for(int j = 0; j <= 180; j += CELL_SIZE) {
+            SDL_RenderDrawLine(ecran,  0, j, 600, j);
         }
 
         SDL_SetRenderDrawColor(ecran, grille_background_color.r, grille_background_color.a, grille_background_color.b, grille_background_color.a);
+
+        SDL_SetRenderDrawColor(ecran, grille_curseur_color.r, grille_curseur_color.g, grille_curseur_color.b, grille_curseur_color.a);
+        SDL_RenderFillRect(ecran, &grille_curseur);
 
         SDL_RenderPresent(ecran);
     }
