@@ -21,12 +21,11 @@
 int main(void){
     SDL_Window* window; // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
-    souris_t souris; //Instanciation d'une souris
+    souris_t souris; // Instanciation d'une souris
+    monde_t monde; // Instanciation du monde
 
     //Initialise les champs de la souris
     init_souris(souris);
-
-    bool terminer = false;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Erreur d'initialisation de la SDL: %s",SDL_GetError());
@@ -64,29 +63,10 @@ int main(void){
     };
 
     // Boucle de jeu
-    while(!terminer) {
-        while(SDL_PollEvent(&evenements)) {
-            switch(evenements.type) {
-                case SDL_QUIT:
-                    terminer = true; 
-                    break;
-                case SDL_KEYDOWN:
-                    switch(evenements.key.keysym.sym) {
-                        case SDLK_ESCAPE:
-                        case SDLK_q:
-                            terminer = true; 
-                            break;
-                    }
-                    break;
-                case SDL_MOUSEMOTION:
-                    cursor_position(souris);
-                    break;
-                case SDL_MOUSEBUTTONDOWN:
-                    grille_curseur.x = (evenements.motion.x / 30) * 30;
-                    grille_curseur.y = (evenements.motion.y / 30) * 30;
-                    break;
-            }
-        }
+    while(monde.etat != -1) {
+        
+        // Gestion des évènements
+        handle_events(&evenements, &monde, &souris, &grille_curseur);
 
         // Mise à jour des donnees
 

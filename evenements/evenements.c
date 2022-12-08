@@ -1,23 +1,14 @@
 #include "evenements.h"
-#include "../donnees/monde.h"
 
 /**
  * \brief La fonction gère les évènements ayant eu lieu et qui n'ont pas encore été traités
- * \param event Paramètre qui contient les événements
- * \param world Les données du monde
+ * \param evenement Paramètre qui contient les événements
+ * \param monde Les données du monde
+ * \param souris La souris durant le jeu
  */
-void handle_events(SDL_Event *evenement, monde_t *monde)
+void handle_events(SDL_Event *evenement, monde_t *monde, souris_t *souris, SDL_Rect *fenetre_grille)
 {
-    souris_t souris; // Instanciation d'une souris
 
-    SDL_Rect grille_curseur = {
-        .x = (20 - 1) / 2 * 30,
-        .y = (6 - 1) / 2 * 30,
-        .w = 30,
-        .h = 30,
-    };
-
-    Uint8 *keystates;
     while (SDL_PollEvent(evenement))
     {
 
@@ -39,11 +30,11 @@ void handle_events(SDL_Event *evenement, monde_t *monde)
             }
             break;
         case SDL_MOUSEMOTION:
-            cursor_position(souris);
+            cursor_position(*souris);
             break;
         case SDL_MOUSEBUTTONDOWN:
-            grille_curseur.x = (evenement->motion.x / 30) * 30;
-            grille_curseur.y = (evenement->motion.y / 30) * 30;
+            fenetre_grille->x = (evenement->motion.x / 30) * 30;
+            fenetre_grille->y = (evenement->motion.y / 30) * 30;
             break;
         }
     }
