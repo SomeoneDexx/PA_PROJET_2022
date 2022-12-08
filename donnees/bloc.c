@@ -11,7 +11,7 @@ bloc_t* allouer_bloc(int lignes, int colonnes){
     for(int i = 0; i < lignes; i++) {
         bloc->tab[i] = malloc(sizeof(char) * colonnes);
         for(int j = 0; j < colonnes; j++) {
-            bloc->tab[i][j] = '#'; 
+            bloc->tab[i][j] = '$'; 
         }
     }
 
@@ -49,12 +49,12 @@ void desallouer_bloc(bloc_t *bloc){
     free(bloc);
 }
 
-void print_bloc(bloc_t bloc){
-    printf("Le bloc n°%d est le suivant :\n", bloc.num);
-    printf("Dimension du bloc n°%d : %dx%d\n\n", bloc.num, bloc.lignes, bloc.colonnes);
-    for(int i = 0; i < bloc.lignes; i++) {
-        for(int j = 0; j < bloc.colonnes; j++) {
-            printf("%c", bloc.tab[i][j]);
+void print_bloc(bloc_t *bloc){
+    printf("Le bloc n°%d est le suivant :\n", bloc->num);
+    printf("Dimension du bloc n°%d : %dx%d\n\n", bloc->num, bloc->lignes, bloc->colonnes);
+    for(int i = 0; i < bloc->lignes; i++) {
+        for(int j = 0; j < bloc->colonnes; j++) {
+            printf("%c", bloc->tab[i][j]);
         }
         printf("\n");
     }
@@ -128,33 +128,33 @@ char** lire_bloc(char* nom_fichier){
     return tab;
 }
 
-void rotation_sh(bloc_t bloc){
+void rotation_sh(bloc_t *bloc){
     
     // Allocation du nouveau tableau
-    char** tab_rsh = malloc(sizeof(char*) * bloc.colonnes);
-    for(int p = 0; p < bloc.colonnes; p++) {
-        tab_rsh[p] = malloc(sizeof(char) * bloc.lignes);
+    char** tab_rsh = malloc(sizeof(char*) * bloc->colonnes);
+    for(int p = 0; p < bloc->colonnes; p++) {
+        tab_rsh[p] = malloc(sizeof(char) * bloc->lignes);
     }
 
-    for (int i = 0; i < bloc.lignes; i++){
-        for (int j = i; j < bloc.colonnes; j++){
-            tab_rsh[j][i] = bloc.tab[bloc.lignes - i - 1][j];
+    for (int i = 0; i < bloc->lignes; i++){
+        for (int j = i; j < bloc->colonnes; j++){
+            tab_rsh[j][i] = bloc->tab[bloc->lignes - i - 1][j];
         }
     }
-    bloc.tab = tab_rsh;
+    bloc->tab = tab_rsh;
 }
 
-void rotation_sah(bloc_t bloc){
+void rotation_sah(bloc_t *bloc){
     // Allocation du nouveau tableau
-    char** tab_rsah = malloc(sizeof(char*) * bloc.colonnes);
-    for(int p = 0; p < bloc.colonnes; p++) {
-        tab_rsah[p] = malloc(sizeof(char) * bloc.lignes);
+    char** tab_rsah = malloc(sizeof(char*) * bloc->colonnes);
+    for(int p = 0; p < bloc->colonnes; p++) {
+        tab_rsah[p] = malloc(sizeof(char) * bloc->lignes);
     }
 
-    for (int i = 0; i < bloc.lignes; i++){
-        for (int j = i; j < bloc.colonnes; j++){
-            tab_rsah[j][i] = bloc.tab[i][bloc.colonnes - j - 1];
+    for (int i = 0; i < bloc->lignes; i++){
+        for (int j = i; j < bloc->colonnes; j++){
+            tab_rsah[j][i] = bloc->tab[i][bloc->colonnes - j - 1];
         }
     }
-    bloc.tab = tab_rsah;
+    bloc->tab = tab_rsah;
 }

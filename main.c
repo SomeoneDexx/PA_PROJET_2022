@@ -65,7 +65,9 @@ int main(void){
 
     // Boucle de jeu
     while(monde.etat != -1) {
-        handle_events(&evenements, &monde, souris, &case_curseur);
+
+        // Gestion des évènements
+        handle_events(&evenements, &monde, &souris, &case_curseur);
 
         // Mise à jour des donnees
 

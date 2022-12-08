@@ -5,8 +5,9 @@
  * \param evenement Paramètre qui contient les événements
  * \param monde Les données du monde
  * \param souris La souris durant le jeu
+ * \param fenetre_grille La grille de la fenetre
  */
-void handle_events(SDL_Event* evenement, monde_t *monde, souris_t souris, SDL_Rect* fenetre_grille)
+void handle_events(SDL_Event *evenement, monde_t *monde, souris_t *souris, SDL_Rect *fenetre_grille)
 {
 
     while (SDL_PollEvent(evenement))
@@ -30,7 +31,7 @@ void handle_events(SDL_Event* evenement, monde_t *monde, souris_t souris, SDL_Re
             }
             break;
         case SDL_MOUSEMOTION:
-            cursor_position(&souris);
+            cursor_position(souris);
             break;
         case SDL_MOUSEBUTTONDOWN:
             fenetre_grille->x = (evenement->motion.x / 30) * 30;

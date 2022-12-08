@@ -61,7 +61,7 @@ void desallouer_bloc(bloc_t *bloc);
  * \brief Fonction qui affiche un bloc dans la console
  * \param bloc Le bloc a afficher
 */
-void print_bloc(bloc_t bloc);
+void print_bloc(bloc_t *bloc);
 
 /**
  * \brief Fonction qui compte le nombre de lignes et de colonnes maximum d'un bloc
@@ -81,12 +81,12 @@ char** lire_bloc(char* nom_fichier);
  * \brief Fonction qui fait tourner un bloc dans le sens horaire
  * \param bloc Le bloc a faire tourner
 */
-void rotation_sh(bloc_t bloc);
+void rotation_sh(bloc_t *bloc);
 
 /**
  * \brief Fonction qui fait tourner un bloc dans le sens anti-horaire
  * \param bloc Le bloc a faire tourner
 */
-void rotation_sah(bloc_t bloc);
+void rotation_sah(bloc_t *bloc);
 
 #endif
