@@ -12,6 +12,6 @@
  * \param monde Les données du monde
  * \param souris La souris durant le jeu
  */
-void handle_events(SDL_Event *evenement, monde_t *monde, souris_t *souris, SDL_Rect *fenetre_grille);
+void handle_events(SDL_Event *evenement, monde_t *monde, souris_t souris, SDL_Rect* fenetre_grille);
 
 #endif

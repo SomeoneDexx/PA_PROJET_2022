@@ -7,7 +7,10 @@
 
 #include <SDL2/SDL.h>
 
-void draw_grid(SDL_Renderer* ecran);
-void refresh_graphics(SDL_Renderer* ecran);
+SDL_Rect init_grille_curseur(int lignes, int colonnes);
+void set_background_color(SDL_Renderer* ecran, SDL_Color grille_background_color);
+void set_lines_color(SDL_Renderer* ecran, SDL_Color grille_lignes_color);
+void draw_lines(SDL_Renderer* ecran, int lignes, int colonnes);
+void select_cell(SDL_Renderer* ecran, SDL_Rect selected_cell, SDL_Color background_color, SDL_Color selected_cell_color);
 
 #endif

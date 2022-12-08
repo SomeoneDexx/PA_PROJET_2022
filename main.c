@@ -14,6 +14,7 @@
 #include "evenements/evenements.h"
 #include "donnees/souris.h"
 #include "graphique/graphique.h"
+#include "donnees/monde.h"
 
 /**
  * \brief Programme principal qui créé les éléments/variables et implémente la boucle du jeu et 
@@ -21,11 +22,12 @@
 int main(void){
     SDL_Window* window; // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
-    souris_t souris; // Instanciation d'une souris
-    monde_t monde; // Instanciation du monde
+    souris_t souris; //Instanciation d'une souris
+    monde_t monde;
 
     //Initialise les champs de la souris
-    init_souris(souris);
+    init_souris(&souris);
+    monde.etat = 1;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Erreur d'initialisation de la SDL: %s",SDL_GetError());
@@ -36,6 +38,7 @@ int main(void){
     int width = WINDOW_WIDTH;
     int height = WINDOW_HEIGHT;
     window = SDL_CreateWindow("Fenetre SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_RESIZABLE);
+
 
     if(window == NULL) {
         printf("Erreur de la creation d'une fenetre: %s",SDL_GetError());
@@ -51,45 +54,29 @@ int main(void){
 
 
     //Initialisation du jeu.
-    SDL_Color grille_background_color = {34, 34, 34, 34};
-    SDL_Color grille_ligne_color = {255, 255, 255, 255};
+    //Création des couleurs de chaques éléments
+    SDL_Color grille_background_color = {43, 43, 43, 43};
+    SDL_Color grille_ligne_color = {125, 125, 125, 125};
     SDL_Color grille_curseur_color = {255, 255, 255, 255};
 
-    SDL_Rect grille_curseur = {
-        .x = (20 - 1) / 2 * 30,
-        .y = (6 - 1) / 2 * 30,
-        .w = 30,
-        .h = 30,
-    };
+    int l, c;
+    taille_fichier("./ressources/grilles/grille4.txt", &l, &c); //CHANGER LE NOM DU FICHIER EN DUR PAR LE CHOIX DE GRILLE DU JOUEUR
+    SDL_Rect case_curseur = init_grille_curseur(l, c); 
 
     // Boucle de jeu
     while(monde.etat != -1) {
-        
-        // Gestion des évènements
-        handle_events(&evenements, &monde, &souris, &grille_curseur);
+        handle_events(&evenements, &monde, souris, &case_curseur);
 
         // Mise à jour des donnees
 
         // Rafraichissement graphique
 
-        SDL_SetRenderDrawColor(ecran, grille_background_color.r, grille_background_color.a, grille_background_color.b, grille_background_color.a);
+        set_background_color(ecran, grille_background_color); //Couleur du background
 
         SDL_RenderClear(ecran);
-
-        SDL_SetRenderDrawColor(ecran, grille_ligne_color.r, grille_ligne_color.g, grille_ligne_color.b, grille_ligne_color.a);
-
-        for(int i = 0; i <= 600; i += CELL_SIZE) {
-            SDL_RenderDrawLine(ecran, i, 0, i, 180);
-        }
-
-        for(int j = 0; j <= 180; j += CELL_SIZE) {
-            SDL_RenderDrawLine(ecran,  0, j, 600, j);
-        }
-
-        SDL_SetRenderDrawColor(ecran, grille_background_color.r, grille_background_color.a, grille_background_color.b, grille_background_color.a);
-
-        SDL_SetRenderDrawColor(ecran, grille_curseur_color.r, grille_curseur_color.g, grille_curseur_color.b, grille_curseur_color.a);
-        SDL_RenderFillRect(ecran, &grille_curseur);
+        set_lines_color(ecran, grille_ligne_color); //Couleur des lignes
+        draw_lines(ecran, l, c); //Dessin des lignes
+        select_cell(ecran, case_curseur, grille_background_color, grille_curseur_color); //Dessin du bloc séléctionné 
 
         SDL_RenderPresent(ecran);
     }

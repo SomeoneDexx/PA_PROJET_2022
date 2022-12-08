@@ -20,8 +20,8 @@ struct Souris {
  * \brief Fonction qui récupère les coordonnées de la souris
  * \param souris La souris à check 
 */
-void cursor_position(souris_t souris);
+void cursor_position(souris_t* souris);
 
-void init_souris(souris_t souris);
+void init_souris(souris_t* souris);
 
 #endif

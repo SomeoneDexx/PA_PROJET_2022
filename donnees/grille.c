@@ -56,4 +56,12 @@ void reset_grille(grille_t grille) {
     ecrire_fichier(chemin, grille.elements, grille.lignes, grille.colonnes);
 }
 
+int choose_grid() {
+    int user_choice = 0;
+    printf("Choisissez un numéro de grille : ");
+    int choice = scanf("%d", &user_choice);
+
+    return user_choice;
+}
+
 
