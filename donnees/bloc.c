@@ -23,9 +23,12 @@ bloc_t* init_bloc(int num, enum couleur coul){
     char n[2];
     sprintf(n, "%d", num);
     char chemin[50] = "ressources/blocs/bloc";
+    printf("%s + %s\n", chemin, n);
     char* extension = ".txt";
     strcat(chemin, n);
+    printf("%s + %s\n", chemin, n);
     strcat(chemin, extension);
+    printf("%s + %s\n", chemin, n);
 
     int l, c;
     taille_bloc(chemin, &l, &c);
@@ -39,6 +42,31 @@ bloc_t* init_bloc(int num, enum couleur coul){
     bloc->coul = coul;
 
     return bloc;
+}
+
+void modif_bloc(bloc_t *bloc, int num, int l, int c, char** tab, enum couleur coul){
+
+    // Désallocation du tableau
+    for(int i = 0; i < bloc->lignes; i++) {
+        free(bloc->tab[i]);
+    }
+    free(bloc->tab);
+
+    // Réallocation du tableau
+    bloc->tab = malloc(sizeof(char*) * c);
+    for(int i = 0; i < l; i++) {
+        bloc->tab[i] = malloc(sizeof(char) * c);
+        for(int j = 0; j < c; j++) {
+            bloc->tab[i][j] = '$'; 
+        }
+    }
+
+    // Modification des attributs du bloc
+    bloc->num = num;
+    bloc->lignes = l;
+    bloc->colonnes = c;
+    bloc->coul = coul;
+    bloc->tab = tab;
 }
 
 void desallouer_bloc(bloc_t *bloc){
@@ -129,32 +157,37 @@ char** lire_bloc(char* nom_fichier){
 }
 
 void rotation_sh(bloc_t *bloc){
-    
-    // Allocation du nouveau tableau
-    char** tab_rsh = malloc(sizeof(char*) * bloc->colonnes);
-    for(int p = 0; p < bloc->colonnes; p++) {
-        tab_rsh[p] = malloc(sizeof(char) * bloc->lignes);
-    }
 
-    for (int i = 0; i < bloc->lignes; i++){
-        for (int j = i; j < bloc->colonnes; j++){
-            tab_rsh[j][i] = bloc->tab[bloc->lignes - i - 1][j];
+    int lignes = bloc->lignes;
+    int colonnes = bloc->colonnes;
+
+    // Allocation du nouveau tableau
+    bloc_t* bloc_tmp = allouer_bloc(colonnes, lignes);
+    char** tab_rsh = bloc_tmp->tab;
+
+    for (int i = 0; i < lignes; i++){
+        for (int j = 0; j < colonnes; j++){
+            tab_rsh[j][i] = bloc->tab[lignes - i - 1][j];
         }
     }
-    bloc->tab = tab_rsh;
+
+    modif_bloc(bloc, bloc->num, colonnes, lignes, tab_rsh, bloc->coul);
 }
 
 void rotation_sah(bloc_t *bloc){
-    // Allocation du nouveau tableau
-    char** tab_rsah = malloc(sizeof(char*) * bloc->colonnes);
-    for(int p = 0; p < bloc->colonnes; p++) {
-        tab_rsah[p] = malloc(sizeof(char) * bloc->lignes);
-    }
 
-    for (int i = 0; i < bloc->lignes; i++){
-        for (int j = i; j < bloc->colonnes; j++){
-            tab_rsah[j][i] = bloc->tab[i][bloc->colonnes - j - 1];
+    int lignes = bloc->lignes;
+    int colonnes = bloc->colonnes;
+
+    // Allocation du nouveau tableau
+    bloc_t* bloc_tmp = allouer_bloc(colonnes, lignes);
+    char** tab_rsah = bloc_tmp->tab;
+
+    for (int i = 0; i < lignes; i++){
+        for (int j = 0; j < colonnes; j++){
+            tab_rsah[j][i] = bloc->tab[i][colonnes - j - 1];
         }
     }
-    bloc->tab = tab_rsah;
+
+    modif_bloc(bloc, bloc->num, colonnes, lignes, tab_rsah, bloc->coul);
 }
