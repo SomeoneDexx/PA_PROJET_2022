@@ -20,15 +20,15 @@ bloc_t* allouer_bloc(int lignes, int colonnes){
 
 bloc_t* init_bloc(int num, enum couleur coul){
 
-    char n[2];
+    int length = snprintf(NULL, 0, "%d", num);
+    char* n = malloc(length + 1);
+    snprintf(n, length + 1, "%d", num);
+
     sprintf(n, "%d", num);
     char chemin[50] = "ressources/blocs/bloc";
-    printf("%s + %s\n", chemin, n);
     char* extension = ".txt";
     strcat(chemin, n);
-    printf("%s + %s\n", chemin, n);
     strcat(chemin, extension);
-    printf("%s + %s\n", chemin, n);
 
     int l, c;
     taille_bloc(chemin, &l, &c);
