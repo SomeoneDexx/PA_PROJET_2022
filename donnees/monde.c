@@ -32,7 +32,7 @@ monde_t* init_monde(monde_t *monde){
     monde->score = 0;
     monde->fin_partie = false;
 
-    // monde->grille = ?
+    monde->grille = init_grille("../ressources/grilles/grille1.txt", 1, 6, 10);
 
     for(int i = 0; i < NB_BLOCS; i++) {
         monde->liste_blocs[i] = init_bloc(i + 1, BLANC);
@@ -46,8 +46,9 @@ monde_t* init_monde(monde_t *monde){
  * \param monde Le monde à désallouer
 */
 void desallouer_monde(monde_t *monde){
+    free(monde->liste_blocs);
+    desallouer_grille(&monde->grille);
     free(monde);
-    // Désallouer liste_blocs et grille !!!
 }
 
 /**

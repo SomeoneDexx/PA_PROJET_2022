@@ -21,6 +21,14 @@ grille_t init_grille(char* nom_fichier, int num, int lignes, int colonnes) {
     return grille;
 }
 
+void desallouer_grille(grille_t *grille){
+    for(int i = 0; i < grille->lignes; i++) {
+        free(grille->elements[i]);
+    }
+    free(grille->elements);
+    free(grille);
+}
+
 void ecrire_fichier_grille(grille_t grille) {
     
     // On récupère le nom du fichier texte de la grille dont on veut réécrire le fichier.

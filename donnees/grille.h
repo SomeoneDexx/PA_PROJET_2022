@@ -22,6 +22,12 @@ struct Grille {
 grille_t init_grille(char* nom_fichier, int num, int lignes, int colonnes);
 
 /**
+ * \brief Fonction qui permet de désallouer la mémoire d'une grille
+ * \param grille La grille à désallouer
+*/
+void desallouer_grille(grille_t *grille);
+
+/**
  * \brief Fonction qui permet d'écrire dans le fichier de la grille les blocs placés dans la grille
  * \param grille La grille nous permettant de modifier son fichier texte
 */
