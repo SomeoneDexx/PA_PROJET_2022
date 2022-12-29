@@ -19,6 +19,11 @@ monde_t* allouer_monde(grille_t *grille){
 
     monde->grille = init_grille(nom_grille, grille->num, grille->lignes, grille->colonnes);
 
+    *monde->liste_blocs = malloc(sizeof(bloc_t));
+    for(int i = 0; i < NB_BLOCS; i++) {
+        monde->liste_blocs[i] = allouer_bloc(5, 5);
+    }
+
     return monde;
 }
 
@@ -46,7 +51,12 @@ monde_t* init_monde(monde_t *monde){
  * \param monde Le monde à désallouer
 */
 void desallouer_monde(monde_t *monde){
-    free(monde->liste_blocs);
+    
+    for (int i = 0; i < NB_BLOCS; i++)
+    {
+        free(monde->liste_blocs[i]);
+    }
+    
     desallouer_grille(&monde->grille);
     free(monde);
 }
