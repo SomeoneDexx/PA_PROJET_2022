@@ -1,5 +1,4 @@
 #include "monde.h"
-#include "bloc.h"
 
 /**
  * \brief Alloue de la mémoire pour le monde
@@ -9,7 +8,16 @@ monde_t* allouer_monde(grille_t *grille){
     monde_t* monde = NULL;
     monde = malloc(sizeof(monde_t));
 
-    // Allouer liste_blocs et grille !!!
+    char n[2];
+    int num = grille->num;
+    sprintf(n, "%d", num);
+
+    char nom_grille[50] = "../ressources/grilles/grille";
+    char* extension = ".txt";
+    strcat(nom_grille, n);
+    strcat(nom_grille, extension);
+
+    monde->grille = init_grille(nom_grille, grille->num, grille->lignes, grille->colonnes);
 
     return monde;
 }
