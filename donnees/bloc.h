@@ -52,6 +52,17 @@ bloc_t* allouer_bloc(int lignes, int colonnes);
 bloc_t* init_bloc(int num, enum couleur coul);
 
 /**
+ * \brief Fonction qui modifie les attributs d'un bloc grace aux donnees passees en parametres
+ * \param bloc Le bloc à modifier
+ * \param num Le numero du bloc
+ * \param l Le nombre de lignes du bloc
+ * \param c Le nombre de colonnes du bloc
+ * \param tab Le tableau du bloc
+ * \param coul La couleur du bloc
+*/
+void modif_bloc(bloc_t *bloc, int num, int l, int c, char** tab, enum couleur coul);
+
+/**
  * \brief Fonction qui desalloue un bloc en memoire
  * \param bloc Le bloc a desallouer
 */
