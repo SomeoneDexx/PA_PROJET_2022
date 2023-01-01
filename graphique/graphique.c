@@ -41,3 +41,9 @@ void complete_grid(SDL_Renderer* ecran, SDL_Color grille_background_color, SDL_C
     draw_lines(ecran, l, c); //Dessin des lignes
     select_cell(ecran, case_curseur, grille_background_color, grille_curseur_color);
 }
+
+SDL_Texture* charger_texte(const char* message, SDL_Renderer* renderer, TTF_Font *font, SDL_Color color) {
+    SDL_Surface* initMyFont = TTF_RenderText_Solid(font, message, color);
+    SDL_Texture* myFont = SDL_CreateTextureFromSurface(renderer, initMyFont);
+    return myFont;
+}

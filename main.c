@@ -57,7 +57,8 @@ int main(void){
     SDL_Color grille_background_color = {43, 43, 43, 43};
     SDL_Color grille_ligne_color = {125, 125, 125, 125};
     SDL_Color grille_curseur_color = {255, 255, 255, 255};
-    SDL_Color color_test = {255, 0, 0, 255};
+    SDL_Color menu_color = {80, 80, 80, 80};
+    SDL_Color menu_text_color = {255, 255, 255, 255};
 
     int l, c, choice;
     char n[2];
@@ -69,6 +70,20 @@ int main(void){
     taille_fichier(filename, &l, &c); //CHANGER LE NOM DU FICHIER EN DUR PAR LE CHOIX DE GRILLE DU JOUEUR
     SDL_Rect case_curseur = init_grille_curseur(l, c); 
 
+    TTF_Init();
+    TTF_Font* font = TTF_OpenFont("ressources/font/arial.ttf", 28);
+    char msg[] = "Choisissez une grille entre 1 et 4 au clavier";
+    SDL_Texture* texte = charger_texte(msg, ecran, font, menu_text_color);
+
+    int wText, hText;
+    SDL_QueryTexture(texte, NULL, NULL, &wText, &hText);
+
+    SDL_Rect text_pos; // Position du texte
+    text_pos.x = (WINDOW_WIDTH / 2) - (wText / 2);
+    text_pos.y = (WINDOW_HEIGHT / 2) - (hText / 2) - 30;
+    text_pos.w = wText; // Largeur du texte en pixels (à récupérer)
+    text_pos.h = hText; // Hauteur du texte en pixels (à récupérer)
+
     // Boucle de jeu
     while(monde.etat != -1) {
         // Gestion des évènements
@@ -76,9 +91,12 @@ int main(void){
     
         // Rafraichissement graphique
         if(monde.current_screen == 0) {
-            set_background_color(ecran, color_test);
-
             SDL_RenderClear(ecran);
+
+            SDL_RenderCopy(ecran, texte, NULL, &text_pos);
+
+            set_background_color(ecran, menu_color);
+
         } else {
             set_background_color(ecran, grille_background_color); //Couleur du background
 
@@ -91,6 +109,9 @@ int main(void){
     }
   
     //Nettoyage final
+    TTF_CloseFont(font);
+    TTF_Quit();
+
     // Libérer de la mémoire
     SDL_DestroyRenderer(ecran);
 
