@@ -13,6 +13,7 @@
  * \param souris La souris durant le jeu
  * \param fenetre_grille La grille de la fenetre
  */
-void handle_events(SDL_Event *evenement, monde_t *monde, souris_t *souris, SDL_Rect *fenetre_grille);
+void handle_events(SDL_Event *evenement, monde_t *monde, souris_t *souris, SDL_Rect *fenetre_grille, int* choice);
+
 
 #endif

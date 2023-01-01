@@ -35,3 +35,9 @@ void select_cell(SDL_Renderer* ecran, SDL_Rect selected_cell, SDL_Color backgrou
     SDL_SetRenderDrawColor(ecran, selected_cell_color.r, selected_cell_color.g, selected_cell_color.b, selected_cell_color.a);
     SDL_RenderFillRect(ecran, &selected_cell);
 }
+
+void complete_grid(SDL_Renderer* ecran, SDL_Color grille_background_color, SDL_Color grille_curseur_color, SDL_Color grille_ligne_color, SDL_Rect case_curseur, int l, int c) {
+    set_lines_color(ecran, grille_ligne_color); //Couleur des lignes
+    draw_lines(ecran, l, c); //Dessin des lignes
+    select_cell(ecran, case_curseur, grille_background_color, grille_curseur_color);
+}

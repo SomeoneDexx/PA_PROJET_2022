@@ -52,33 +52,40 @@ int main(void){
     SDL_Renderer* ecran;
     ecran = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);    
 
-
     //Initialisation du jeu.
     //Création des couleurs de chaques éléments
     SDL_Color grille_background_color = {43, 43, 43, 43};
     SDL_Color grille_ligne_color = {125, 125, 125, 125};
     SDL_Color grille_curseur_color = {255, 255, 255, 255};
+    SDL_Color color_test = {255, 0, 0, 255};
 
-    int l, c;
-    taille_fichier("./ressources/grilles/grille4.txt", &l, &c); //CHANGER LE NOM DU FICHIER EN DUR PAR LE CHOIX DE GRILLE DU JOUEUR
+    int l, c, choice;
+    char n[2];
+    sprintf(n, "%d", choice);
+    char filename[50] = "../ressources/grilles/grille";
+    char* extension = ".txt";
+    strcat(filename, n);
+    strcat(filename, extension);
+    taille_fichier(filename, &l, &c); //CHANGER LE NOM DU FICHIER EN DUR PAR LE CHOIX DE GRILLE DU JOUEUR
     SDL_Rect case_curseur = init_grille_curseur(l, c); 
 
     // Boucle de jeu
     while(monde.etat != -1) {
-
         // Gestion des évènements
-        handle_events(&evenements, &monde, &souris, &case_curseur);
-
-        // Mise à jour des donnees
-
+        handle_events(&evenements, &monde, &souris, &case_curseur, &choice);
+    
         // Rafraichissement graphique
+        if(monde.current_screen == 0) {
+            set_background_color(ecran, color_test);
 
-        set_background_color(ecran, grille_background_color); //Couleur du background
+            SDL_RenderClear(ecran);
+        } else {
+            set_background_color(ecran, grille_background_color); //Couleur du background
 
-        SDL_RenderClear(ecran);
-        set_lines_color(ecran, grille_ligne_color); //Couleur des lignes
-        draw_lines(ecran, l, c); //Dessin des lignes
-        select_cell(ecran, case_curseur, grille_background_color, grille_curseur_color); //Dessin du bloc séléctionné 
+            SDL_RenderClear(ecran);
+
+            complete_grid(ecran, grille_background_color, grille_curseur_color, grille_ligne_color, case_curseur, l, c); //Dessin de la grille
+        }
 
         SDL_RenderPresent(ecran);
     }

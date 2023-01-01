@@ -22,6 +22,7 @@ struct Monde {
     bool fin_partie; // Indique si la partie est terminée ou non
     grille_t grille; // La grille de jeu
     bloc_t *liste_blocs[NB_BLOCS]; // Liste des blocs du jeu
+    int current_screen;
 };
 
 /**

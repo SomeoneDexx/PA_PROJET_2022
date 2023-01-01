@@ -40,6 +40,5 @@ void reset_grille(grille_t grille);
 */
 void modif_grille(grille_t grille, char** tab);
 
-int choose_grid();
 
 #endif

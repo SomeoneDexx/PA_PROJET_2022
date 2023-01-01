@@ -23,6 +23,7 @@ monde_t* init_monde(monde_t *monde){
     monde->etat = 0;
     monde->score = 0;
     monde->fin_partie = false;
+    monde->current_screen = 0;
 
     // monde->grille = ?
 
