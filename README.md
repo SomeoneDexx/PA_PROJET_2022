@@ -1,9 +1,11 @@
 # PA_PROJET_2022
+BINOME : PIERRE GERONIMUS - BAPTISTE RUAULT L2 TP4
+LIEN GIT : https://github.com/SomeoneDexx/PA_PROJET_2022
 
-Projet de Programmation Avancée 2022/2023 : Pentomino
+Projet de Programmation Avancée 2022/2023 : Pentamino
 
 Jeu :
-Le Pentomino est un jeu de puzzle dans lequel on doit remplir une grille de 60 cases avec 12 pièces de 5 cases chacune.
+Le Pentamino est un jeu de puzzle dans lequel on doit remplir une grille de 60 cases avec 12 pièces de 5 cases chacune.
 
 Grille :
 La grille de base est un rectangle (6x10, 5x12, 4x15 ou 3x20).
