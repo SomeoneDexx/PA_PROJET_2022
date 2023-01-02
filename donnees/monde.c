@@ -2,22 +2,24 @@
 
 /**
  * \brief Alloue de la mémoire pour le monde
- * \param grille La grille du monde
+ * \param num_grille Le numéro de la grille du monde
 */
-monde_t* allouer_monde(grille_t *grille){
+monde_t* allouer_monde(int num_grille){
     monde_t* monde = NULL;
     monde = malloc(sizeof(monde_t));
 
     char n[2];
-    int num = grille->num;
-    sprintf(n, "%d", num);
+    sprintf(n, "%d", num_grille);
 
     char nom_grille[50] = "../ressources/grilles/grille";
     char* extension = ".txt";
     strcat(nom_grille, n);
     strcat(nom_grille, extension);
 
-    monde->grille = init_grille(nom_grille, grille->num, grille->lignes, grille->colonnes);
+    int lignes, colonnes;
+    taille_fichier(nom_grille, &lignes, &colonnes);
+
+    monde->grille = init_grille(nom_grille, num_grille, lignes, colonnes);
 
     *monde->liste_blocs = malloc(sizeof(bloc_t));
     for(int i = 0; i < NB_BLOCS; i++) {
@@ -31,20 +33,16 @@ monde_t* allouer_monde(grille_t *grille){
  * \brief Initialise les données du monde
  * \param monde Le monde à initialiser
 */
-monde_t* init_monde(monde_t *monde){
+void init_monde(monde_t *monde){
 
     monde->etat = 0;
     monde->score = 0;
     monde->fin_partie = false;
     monde->current_screen = 0;
 
-    monde->grille = init_grille("../ressources/grilles/grille1.txt", 1, 6, 10);
-
     for(int i = 0; i < NB_BLOCS; i++) {
-        monde->liste_blocs[i] = init_bloc(i + 1, ROSE);
+        monde->liste_blocs[i] = init_bloc(i + 1, i);
     }
-
-    return monde;
 }
 
 /**
@@ -71,7 +69,6 @@ void print_liste_blocs(monde_t *monde){
     {
         print_bloc(monde->liste_blocs[i]);
     }
-    
 }
 
 void update_grille(monde_t* monde, int l, int c) {

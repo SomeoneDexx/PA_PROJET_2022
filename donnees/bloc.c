@@ -79,13 +79,14 @@ void desallouer_bloc(bloc_t *bloc){
 
 void print_bloc(bloc_t *bloc){
     printf("Le bloc n°%d est le suivant :\n", bloc->num);
-    printf("Dimension du bloc n°%d : %dx%d\n\n", bloc->num, bloc->lignes, bloc->colonnes);
+    printf("Dimension du bloc n°%d : %dx%d\n", bloc->num, bloc->lignes, bloc->colonnes);
     for(int i = 0; i < bloc->lignes; i++) {
         for(int j = 0; j < bloc->colonnes; j++) {
             printf("%c", bloc->tab[i][j]);
         }
         printf("\n");
     }
+    printf("\n");
 }
 
 void taille_bloc(const char* nom_fichier, int* nbLig, int* nbCol){

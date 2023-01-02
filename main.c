@@ -23,11 +23,10 @@ int main(void){
     SDL_Window* window; // Déclaration de la fenêtre
     SDL_Event evenements; // Événements liés à la fenêtre
     souris_t souris; //Instanciation d'une souris
-    monde_t monde;
+    monde_t* monde;
 
     //Initialise les champs de la souris
     init_souris(&souris);
-    monde.etat = 1;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Erreur d'initialisation de la SDL: %s",SDL_GetError());
@@ -78,9 +77,11 @@ int main(void){
     char n[2];
     SDL_Rect case_curseur = init_grille_curseur(0, 0); 
 
+    monde = allouer_monde(1);
+
     while (choice == 0) {
         // Gestion des évènements
-        handle_events(&evenements, &monde, &souris, &case_curseur, &choice);
+        handle_events(&evenements, monde, &souris, &case_curseur, &choice);
     
         SDL_RenderClear(ecran);
 
@@ -97,29 +98,19 @@ int main(void){
     strcat(filename, n);
     strcat(filename, extension);
     taille_fichier(filename, &l, &c);
-    update_grille(&monde, l, c);
+
+    init_monde(monde);
+    print_liste_blocs(monde);
+    monde->current_screen = 1;
+    update_grille(monde, l, c);
 
     // Boucle de jeu
-    while(monde.etat != -1) {
+    while(monde->etat != -1) {
         // Gestion des évènements
-        handle_events(&evenements, &monde, &souris, &case_curseur, &choice);
-    
-        // Rafraichissement graphique
-        if(monde.current_screen == 0) {
-            SDL_RenderClear(ecran);
-
-            SDL_RenderCopy(ecran, texte, NULL, &text_pos);
-
-            set_background_color(ecran, menu_color);
-
-        } else {
-            set_background_color(ecran, grille_background_color); //Couleur du background
-
-            SDL_RenderClear(ecran);
-
-            complete_grid(ecran, grille_background_color, grille_curseur_color, grille_ligne_color, case_curseur, l, c); //Dessin de la grille
-        }
-
+        handle_events(&evenements, monde, &souris, &case_curseur, &choice);
+        set_background_color(ecran, grille_background_color); //Couleur du background
+        SDL_RenderClear(ecran);
+        complete_grid(ecran, grille_background_color, grille_curseur_color, grille_ligne_color, case_curseur, l, c); //Dessin de la grille
         SDL_RenderPresent(ecran);
     }
   

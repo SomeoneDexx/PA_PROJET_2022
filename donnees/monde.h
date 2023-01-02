@@ -23,20 +23,20 @@ struct Monde {
     bool fin_partie; // Indique si la partie est terminée ou non
     grille_t grille; // La grille de jeu
     bloc_t *liste_blocs[NB_BLOCS]; // Liste des blocs du jeu
-    int current_screen;
+    int current_screen; // Ecran du jeu, menu (0), jeu (1)
 };
 
 /**
  * \brief Alloue de la mémoire pour le monde
- * \param grille La grille du monde
+ * \param num_grille Le numéro de la grille du monde
 */
-monde_t* allouer_monde(grille_t *grille);
+monde_t* allouer_monde(int num_grille);
 
 /**
  * \brief Initialise les données du monde
  * \param monde Le monde à initialiser
 */
-monde_t* init_monde(monde_t *monde);
+void init_monde(monde_t *monde);
 
 /**
  * \brief Désalloue les données du monde
