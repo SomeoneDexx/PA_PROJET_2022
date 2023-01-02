@@ -41,7 +41,7 @@ monde_t* init_monde(monde_t *monde){
     monde->grille = init_grille("../ressources/grilles/grille1.txt", 1, 6, 10);
 
     for(int i = 0; i < NB_BLOCS; i++) {
-        monde->liste_blocs[i] = init_bloc(i + 1, BLANC);
+        monde->liste_blocs[i] = init_bloc(i + 1, ROSE);
     }
 
     return monde;
