@@ -60,16 +60,6 @@ int main(void){
     SDL_Color menu_color = {80, 80, 80, 80};
     SDL_Color menu_text_color = {255, 255, 255, 255};
 
-    int l, c, choice;
-    char n[2];
-    sprintf(n, "%d", choice);
-    char filename[50] = "../ressources/grilles/grille";
-    char* extension = ".txt";
-    strcat(filename, n);
-    strcat(filename, extension);
-    taille_fichier(filename, &l, &c); //CHANGER LE NOM DU FICHIER EN DUR PAR LE CHOIX DE GRILLE DU JOUEUR
-    SDL_Rect case_curseur = init_grille_curseur(l, c); 
-
     TTF_Init();
     TTF_Font* font = TTF_OpenFont("ressources/font/arial.ttf", 28);
     char msg[] = "Choisissez une grille entre 1 et 4 au clavier";
@@ -83,6 +73,30 @@ int main(void){
     text_pos.y = (WINDOW_HEIGHT / 2) - (hText / 2) - 30;
     text_pos.w = wText; // Largeur du texte en pixels (à récupérer)
     text_pos.h = hText; // Hauteur du texte en pixels (à récupérer)
+
+    int l, c, choice = 0;
+    char n[2];
+    SDL_Rect case_curseur = init_grille_curseur(0, 0); 
+
+    while (choice == 0) {
+        // Gestion des évènements
+        handle_events(&evenements, &monde, &souris, &case_curseur, &choice);
+    
+        SDL_RenderClear(ecran);
+
+        SDL_RenderCopy(ecran, texte, NULL, &text_pos);
+
+        set_background_color(ecran, menu_color);
+
+        SDL_RenderPresent(ecran);
+    }
+
+    sprintf(n, "%d", choice);
+    char filename[50] = "ressources/grilles/grille";
+    char* extension = ".txt";
+    strcat(filename, n);
+    strcat(filename, extension);
+    taille_fichier(filename, &l, &c);
 
     // Boucle de jeu
     while(monde.etat != -1) {

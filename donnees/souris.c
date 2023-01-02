@@ -8,7 +8,7 @@ void cursor_position(souris_t *souris) {
     SDL_GetMouseState(&x, &y);
     souris->pos_x = x;
     souris->pos_y = y;
-    printf("x : %d, y : %d\n", souris->pos_x, souris->pos_y);
+    //printf("x : %d, y : %d\n", souris->pos_x, souris->pos_y);
 }
 
 void init_souris(souris_t *souris) {
