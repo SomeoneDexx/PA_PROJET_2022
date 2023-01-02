@@ -15,5 +15,4 @@
  */
 void handle_events(SDL_Event *evenement, monde_t *monde, souris_t *souris, SDL_Rect *fenetre_grille, int* choice);
 
-
 #endif

@@ -73,3 +73,8 @@ void print_liste_blocs(monde_t *monde){
     }
     
 }
+
+void update_grille(monde_t* monde, int l, int c) {
+    monde->grille.lignes = l;
+    monde->grille.colonnes = c;
+}   

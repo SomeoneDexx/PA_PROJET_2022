@@ -1,4 +1,5 @@
 #include "evenements.h"
+#include "../graphique/graphique.h"
 
 /**
  * \brief La fonction gère les évènements ayant eu lieu et qui n'ont pas encore été traités
@@ -53,8 +54,10 @@ void handle_events(SDL_Event *evenement, monde_t *monde, souris_t *souris, SDL_R
                     cursor_position(souris);
                     break;
                 case SDL_MOUSEBUTTONDOWN:
-                    fenetre_grille->x = (evenement->motion.x / 30) * 30;
-                    fenetre_grille->y = (evenement->motion.y / 30) * 30;
+                    if(souris->pos_x <= (monde->grille.colonnes) * CELL_SIZE && souris->pos_y <= (monde->grille.lignes) * CELL_SIZE) {
+                        fenetre_grille->x = (evenement->motion.x / 30) * 30;
+                        fenetre_grille->y = (evenement->motion.y / 30) * 30;
+                    }
                     break;
             }
         }

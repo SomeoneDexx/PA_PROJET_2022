@@ -97,6 +97,7 @@ int main(void){
     strcat(filename, n);
     strcat(filename, extension);
     taille_fichier(filename, &l, &c);
+    update_grille(&monde, l, c);
 
     // Boucle de jeu
     while(monde.etat != -1) {

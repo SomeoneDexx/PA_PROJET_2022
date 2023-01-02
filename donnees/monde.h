@@ -50,4 +50,6 @@ void desallouer_monde(monde_t *monde);
 */
 void print_liste_blocs(monde_t *monde);
 
+void update_grille(monde_t* monde, int l, int c);
+
 #endif
