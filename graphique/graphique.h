@@ -1,8 +1,8 @@
 #ifndef GRAPHIQUE_H
 #define GRAPHIQUE_H
 
-#define WINDOW_WIDTH 750
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1200
+#define WINDOW_HEIGHT 700
 #define CELL_SIZE 32
 
 #include <SDL2/SDL.h>

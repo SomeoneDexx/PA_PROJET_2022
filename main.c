@@ -123,7 +123,7 @@ int main(void){
         for (int j = 0; j < 25; j++)
         {
             DestR_sprite_blocs[i][j].x = offset + (j / 5 + 1) * CELL_SIZE;
-            DestR_sprite_blocs[i][j].y = i > 5 ? (j % 5 + 12) * CELL_SIZE : (j % 5 + 6) * CELL_SIZE;
+            DestR_sprite_blocs[i][j].y = i > 5 ? (j % 5 + 13) * CELL_SIZE : (j % 5 + 7) * CELL_SIZE;
             DestR_sprite_blocs[i][j].w = CELL_SIZE;
             DestR_sprite_blocs[i][j].h = CELL_SIZE;
         }
@@ -153,7 +153,9 @@ int main(void){
                     for (int l = 0; l < nb_col_b; l++)
                     {
                         if(monde->liste_blocs[i]->tab[k][l] == '#') {
-                            SDL_RenderCopy(ecran, sprites_blocs, &SrcR_sprite_blocs[i], &DestR_sprite_blocs[i][j]);  
+                            SDL_RenderCopy(ecran, sprites_blocs, &SrcR_sprite_blocs[i], &DestR_sprite_blocs[i][j]);
+                        } else {
+                           SDL_RenderCopy(ecran, sprites_blocs, &SrcR_sprite_blocs[12], &DestR_sprite_blocs[i][j]);
                         }
                     }
                 }                  
