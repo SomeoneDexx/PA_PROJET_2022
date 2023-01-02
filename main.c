@@ -106,10 +106,12 @@ int main(void){
 
     SDL_Texture *sprites_blocs;
     SDL_Rect SrcR_sprite_blocs[NB_BLOCS];
-    SDL_Rect DestR_sprite_blocs[NB_BLOCS];
+    SDL_Rect DestR_sprite_blocs[NB_BLOCS][25];
     
     Uint8 r = 0, g = 255, b = 255;
     sprites_blocs = charger_image_transparente("ressources/blocs.bmp", ecran, r, g, b);
+
+    int offset = 0;
 
     for (int i = 0; i < NB_BLOCS; i++)
     {
@@ -117,19 +119,19 @@ int main(void){
         SrcR_sprite_blocs[i].y = 0;
         SrcR_sprite_blocs[i].w = 32;
         SrcR_sprite_blocs[i].h = 32;
-    }
-
-    for (int i = 0; i < NB_BLOCS; i++)
-    {
-        DestR_sprite_blocs[i].x = i % 6 * CELL_SIZE * 6;
-        DestR_sprite_blocs[i].y = i > 6 ? CELL_SIZE * 14 : CELL_SIZE * 8;
-        DestR_sprite_blocs[i].w = CELL_SIZE;
-        DestR_sprite_blocs[i].h = CELL_SIZE;
-    }
     
-    for (int i = 0; i < NB_BLOCS; i++)
-    {
-        SDL_RenderCopy(ecran, sprites_blocs, &SrcR_sprite_blocs[i], &DestR_sprite_blocs[i]);
+        for (int j = 0; j < 25; j++)
+        {
+            DestR_sprite_blocs[i][j].x = offset + (j / 5 + 1) * CELL_SIZE;
+            DestR_sprite_blocs[i][j].y = i > 5 ? (j % 5 + 12) * CELL_SIZE : (j % 5 + 6) * CELL_SIZE;
+            DestR_sprite_blocs[i][j].w = CELL_SIZE;
+            DestR_sprite_blocs[i][j].h = CELL_SIZE;
+        }
+
+        if(i == 5){
+            offset = -5 * CELL_SIZE;
+        }
+        offset += 5 * CELL_SIZE;
     }
 
     // Boucle de jeu
@@ -139,6 +141,24 @@ int main(void){
         set_background_color(ecran, grille_background_color); //Couleur du background
         SDL_RenderClear(ecran);
         complete_grid(ecran, grille_background_color, grille_curseur_color, grille_ligne_color, case_curseur, l, c); //Dessin de la grille
+        
+        for (int i = 0; i < NB_BLOCS; i++)
+        {
+            for (int j = 0; j < 25; j++)
+            {
+                int nb_lig_b = monde->liste_blocs[i]->lignes;
+                int nb_col_b = monde->liste_blocs[i]->colonnes;
+                for (int k = 0; k < nb_lig_b; k++)
+                {
+                    for (int l = 0; l < nb_col_b; l++)
+                    {
+                        if(monde->liste_blocs[i]->tab[k][l] == '#') {
+                            SDL_RenderCopy(ecran, sprites_blocs, &SrcR_sprite_blocs[i], &DestR_sprite_blocs[i][j]);  
+                        }
+                    }
+                }                  
+            }
+        }
         SDL_RenderPresent(ecran);
     }
   
