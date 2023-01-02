@@ -50,6 +50,11 @@ void desallouer_monde(monde_t *monde);
 */
 void print_liste_blocs(monde_t *monde);
 
+/** \brief Fonction qui update les dimensions de la grille en fonction du choix du joueur
+ * \param monde Le monde associé à la grille 
+ * \param l Le nombre de ligne du fichier choisi
+ * \param c Le nombre de colonne du fichier choisi
+*/
 void update_grille(monde_t* monde, int l, int c);
 
 #endif

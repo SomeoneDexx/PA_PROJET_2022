@@ -12,6 +12,7 @@
  * \param monde Les données du monde
  * \param souris La souris durant le jeu
  * \param fenetre_grille La grille de la fenetre
+ * \param choice Le choix de la grille dans laquelle on joue
  */
 void handle_events(SDL_Event *evenement, monde_t *monde, souris_t *souris, SDL_Rect *fenetre_grille, int* choice);
 

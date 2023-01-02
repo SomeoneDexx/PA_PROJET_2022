@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//n c'est les lignes, m les colonnes
 char** allouer_tab_cases(int lignes, int colonnes) { 
     char** tab = NULL;
     tab = malloc(sizeof(char*) * lignes);
@@ -17,7 +16,6 @@ char** allouer_tab_cases(int lignes, int colonnes) {
     return tab;
 }
 
-//On desalloue chaque ligne puis on desalloue tab, on desalloue chaque malloc en fait
 void desallouer_tab_cases(char** tab, int lignes) {
     for(int i = 0; i < lignes; i++) {
         free(tab[i]);
@@ -26,7 +24,6 @@ void desallouer_tab_cases(char** tab, int lignes) {
     free(tab);
 }
 
-//Affichage de chaque caractère dans le tableau
 void afficher_tab_cases(char** tab, int lignes, int colonnes) {
     for(int i = 0; i < lignes; i++) {
         for(int j = 0; j < colonnes; j++) {
@@ -36,7 +33,6 @@ void afficher_tab_cases(char** tab, int lignes, int colonnes) {
     }
 }
 
-//Modifie les valeurs de nbLig et nbCol avec le nombre de ligne et de colonne ----> nbLig va modifier n et nbCol va modifier m
 void taille_fichier(const char* nomFichier, int* nbLig, int* nbCol) {
     FILE* fileOpen = NULL;
     fileOpen = fopen(nomFichier, "r"); 
@@ -71,7 +67,6 @@ void taille_fichier(const char* nomFichier, int* nbLig, int* nbCol) {
     }
 }
 
-//Lit les caractères d'un fichier et rempli un tableau de ces mêmes caractères
 char** lire_fichier(const char* nomFichier) {
     FILE* fileOpen = NULL;
     fileOpen = fopen(nomFichier, "r"); 
@@ -106,7 +101,6 @@ char** lire_fichier(const char* nomFichier) {
     return tab;
 }
 
-//Fonction écrivant dans un fichier à partir d'un tableau
 void ecrire_fichier(const char* nomFichier, char** tab, int lignes, int colonnes) {
     FILE* fileOpen = NULL;
     fileOpen = fopen(nomFichier, "w");

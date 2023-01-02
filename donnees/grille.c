@@ -30,7 +30,6 @@ void desallouer_grille(grille_t *grille){
 }
 
 void ecrire_fichier_grille(grille_t grille) {
-    
     // On récupère le nom du fichier texte de la grille dont on veut réécrire le fichier.
     char n[2];
     int num = grille.num;
@@ -44,7 +43,6 @@ void ecrire_fichier_grille(grille_t grille) {
 }
 
 void reset_grille(grille_t grille) {
-
     // On "réinitilise" le tableau de la grille
     for(int i = 0; i < grille.lignes; i++) {
         for(int j = 0; j < grille.colonnes; j++) {

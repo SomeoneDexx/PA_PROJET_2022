@@ -1,13 +1,6 @@
 #include "evenements.h"
 #include "../graphique/graphique.h"
 
-/**
- * \brief La fonction gère les évènements ayant eu lieu et qui n'ont pas encore été traités
- * \param evenement Paramètre qui contient les événements
- * \param monde Les données du monde
- * \param souris La souris durant le jeu
- * \param fenetre_grille La grille de la fenetre
- */
 void handle_events(SDL_Event *evenement, monde_t *monde, souris_t *souris, SDL_Rect *fenetre_grille, int* choice) {
     while (SDL_PollEvent(evenement)) {
         if(monde->current_screen == 0) {

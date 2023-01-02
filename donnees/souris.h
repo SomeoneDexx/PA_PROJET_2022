@@ -22,6 +22,10 @@ struct Souris {
 */
 void cursor_position(souris_t *souris);
 
+/**
+ * \brief Fonction qui initialise la souris
+ * \param souris La souris à initialiser
+*/
 void init_souris(souris_t *souris);
 
 #endif

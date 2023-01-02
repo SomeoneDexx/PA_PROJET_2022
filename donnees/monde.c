@@ -1,9 +1,5 @@
 #include "monde.h"
 
-/**
- * \brief Alloue de la mémoire pour le monde
- * \param num_grille Le numéro de la grille du monde
-*/
 monde_t* allouer_monde(int num_grille){
     monde_t* monde = NULL;
     monde = malloc(sizeof(monde_t));
@@ -29,10 +25,6 @@ monde_t* allouer_monde(int num_grille){
     return monde;
 }
 
-/**
- * \brief Initialise les données du monde
- * \param monde Le monde à initialiser
-*/
 void init_monde(monde_t *monde){
 
     monde->etat = 0;
@@ -45,10 +37,6 @@ void init_monde(monde_t *monde){
     }
 }
 
-/**
- * \brief Désalloue les données du monde
- * \param monde Le monde à désallouer
-*/
 void desallouer_monde(monde_t *monde){
     
     for (int i = 0; i < NB_BLOCS; i++)
@@ -60,10 +48,6 @@ void desallouer_monde(monde_t *monde){
     free(monde);
 }
 
-/**
- * \brief Liste les blocs présents dans les données du monde sur la sortie standard
- * \param monde Le monde dont on affiche les blocs
-*/
 void print_liste_blocs(monde_t *monde){
     for (int i = 0; i < NB_BLOCS; i++)
     {
