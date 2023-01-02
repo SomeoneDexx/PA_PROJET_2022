@@ -1,5 +1,6 @@
 #include "graphique.h"
 #include "../donnees/fonctions_fichier.h"
+#include "../donnees/monde.h"
 
 SDL_Rect init_grille_curseur(int lignes, int colonnes) {
     SDL_Rect grille_curseur = {
@@ -46,4 +47,24 @@ SDL_Texture* charger_texte(const char* message, SDL_Renderer* renderer, TTF_Font
     SDL_Surface* initMyFont = TTF_RenderText_Solid(font, message, color);
     SDL_Texture* myFont = SDL_CreateTextureFromSurface(renderer, initMyFont);
     return myFont;
+}
+
+SDL_Texture* charger_image_transparente (const char* nomfichier, SDL_Renderer* renderer, Uint8 r, Uint8 g, Uint8 b){
+  SDL_Surface *tmp = NULL;
+  SDL_Texture *texture = NULL;
+  tmp = SDL_LoadBMP(nomfichier);
+  if(NULL == tmp)
+    {
+      fprintf(stderr, "Erreur pendant chargement image BMP: %s", SDL_GetError());
+      return NULL;
+    }
+  SDL_SetColorKey(tmp, SDL_TRUE, SDL_MapRGB(tmp->format, r, g, b));
+  texture = SDL_CreateTextureFromSurface(renderer, tmp);
+  SDL_FreeSurface(tmp);
+  if(NULL == texture)
+    {
+      fprintf(stderr, "Erreur pendant creation de la texture liee a l'image chargee: %s", SDL_GetError());
+      return NULL;
+    }
+  return texture;
 }

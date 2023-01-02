@@ -30,7 +30,7 @@ enum couleur {
 */
 typedef struct Bloc bloc_t;
 struct Bloc {
-    int lignes; 
+    int lignes;
     int colonnes;
     int num;
     char** tab;

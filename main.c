@@ -100,9 +100,37 @@ int main(void){
     taille_fichier(filename, &l, &c);
 
     init_monde(monde);
-    print_liste_blocs(monde);
+    //print_liste_blocs(monde);
     monde->current_screen = 1;
     update_grille(monde, l, c);
+
+    SDL_Texture *sprites_blocs;
+    SDL_Rect SrcR_sprite_blocs[NB_BLOCS];
+    SDL_Rect DestR_sprite_blocs[NB_BLOCS];
+    
+    Uint8 r = 0, g = 255, b = 255;
+    sprites_blocs = charger_image_transparente("ressources/blocs.bmp", ecran, r, g, b);
+
+    for (int i = 0; i < NB_BLOCS; i++)
+    {
+        SrcR_sprite_blocs[i].x = i * 32;
+        SrcR_sprite_blocs[i].y = 0;
+        SrcR_sprite_blocs[i].w = 32;
+        SrcR_sprite_blocs[i].h = 32;
+    }
+
+    for (int i = 0; i < NB_BLOCS; i++)
+    {
+        DestR_sprite_blocs[i].x = i % 6 * CELL_SIZE * 6;
+        DestR_sprite_blocs[i].y = i > 6 ? CELL_SIZE * 14 : CELL_SIZE * 8;
+        DestR_sprite_blocs[i].w = CELL_SIZE;
+        DestR_sprite_blocs[i].h = CELL_SIZE;
+    }
+    
+    for (int i = 0; i < NB_BLOCS; i++)
+    {
+        SDL_RenderCopy(ecran, sprites_blocs, &SrcR_sprite_blocs[i], &DestR_sprite_blocs[i]);
+    }
 
     // Boucle de jeu
     while(monde->etat != -1) {
